@@ -1,8 +1,8 @@
-drop database if exists furama;
-create database furama;
-use furama;
+DROP DATABASE IF EXISTS furama;
+CREATE DATABASE furama;
+USE furama;
 CREATE TABLE nhan_vien (
-    ma_nhan_vien INT primary key,
+    ma_nhan_vien INT PRIMARY KEY,
     ho_ten VARCHAR(45),
     ngay_sinh DATE,
     so_cmnd VARCHAR(45),
@@ -85,79 +85,270 @@ CREATE TABLE hop_dong (
     ma_khach_hang INT,
     ma_dich_vu INT
 );
-alter table nhan_vien add foreign key (ma_vi_tri) references vi_tri(ma_vi_tri);
-alter table nhan_vien add foreign key (ma_bo_phan) references bo_phan(ma_bo_phan);
-alter table nhan_vien add foreign key (ma_trinh_do) references trinh_do(ma_trinh_do);
-alter table khach_hang add foreign key (ma_loai_khach) references loai_khach(ma_loai_khach);
-alter table dich_vu add foreign key (ma_loai_dich_vu) references loai_dich_vu(ma_loai_dich_vu);
-alter table dich_vu add foreign key (ma_kieu_thue) references kieu_thue(ma_kieu_thue);
-alter table hop_dong_chi_tiet add foreign key (ma_dich_vu_di_kem) references dich_vu_di_kem(ma_dich_vu_di_kem);
-alter table hop_dong_chi_tiet add foreign key (ma_hop_dong) references hop_dong(ma_hop_dong);
-alter table hop_dong add foreign key (ma_nhan_vien) references nhan_vien(ma_nhan_vien);
-alter table hop_dong add foreign key (ma_khach_hang) references khach_hang(ma_khach_hang);
-alter table hop_dong add foreign key (ma_dich_vu) references dich_vu(ma_dich_vu);
+ALTER TABLE nhan_vien ADD FOREIGN KEY (ma_vi_tri) REFERENCES vi_tri(ma_vi_tri);
+ALTER TABLE nhan_vien ADD FOREIGN KEY (ma_bo_phan) REFERENCES bo_phan(ma_bo_phan);
+ALTER TABLE nhan_vien ADD FOREIGN KEY (ma_trinh_do) REFERENCES trinh_do(ma_trinh_do);
+ALTER TABLE khach_hang ADD FOREIGN KEY (ma_loai_khach) REFERENCES loai_khach(ma_loai_khach);
+ALTER TABLE dich_vu ADD FOREIGN KEY (ma_loai_dich_vu) REFERENCES loai_dich_vu(ma_loai_dich_vu);
+ALTER TABLE dich_vu ADD FOREIGN KEY (ma_kieu_thue) REFERENCES kieu_thue(ma_kieu_thue);
+ALTER TABLE hop_dong_chi_tiet ADD FOREIGN KEY (ma_dich_vu_di_kem) REFERENCES dich_vu_di_kem(ma_dich_vu_di_kem);
+ALTER TABLE hop_dong_chi_tiet ADD FOREIGN KEY (ma_hop_dong) REFERENCES hop_dong(ma_hop_dong);
+ALTER TABLE hop_dong ADD FOREIGN KEY (ma_nhan_vien) REFERENCES nhan_vien(ma_nhan_vien);
+ALTER TABLE hop_dong ADD FOREIGN KEY (ma_khach_hang) REFERENCES khach_hang(ma_khach_hang);
+ALTER TABLE hop_dong ADD FOREIGN KEY (ma_dich_vu) REFERENCES dich_vu(ma_dich_vu);
 
-INSERT INTO `furama`.`vi_tri` (`ma_vi_tri`, `ten_vi_tri`) VALUES ('1', 'Quản Lý');
-INSERT INTO `furama`.`vi_tri` (`ma_vi_tri`, `ten_vi_tri`) VALUES ('2', 'Nhân Viên');
+INSERT INTO furama.vi_tri (ma_vi_tri, ten_vi_tri)
+VALUES 
+('1', 'Quản Lý'),
+('2', 'Nhân Viên');
 
-INSERT INTO `furama`.`trinh_do` (`ma_trinh_do`, `ten_trinh_do`) VALUES ('1', 'Trung Cấp');
-INSERT INTO `furama`.`trinh_do` (`ma_trinh_do`, `ten_trinh_do`) VALUES ('2', 'Cao Đẳng');
-INSERT INTO `furama`.`trinh_do` (`ma_trinh_do`, `ten_trinh_do`) VALUES ('3', 'Đại Học');
-INSERT INTO `furama`.`trinh_do` (`ma_trinh_do`, `ten_trinh_do`) VALUES ('4', 'Sau Đại Học');
+INSERT INTO FURAma.triNH_do (ma_TRinh_do, teN_trinh_do) 
+VALUES
+ ('1', 'TrUng Cấp'),
+ ('2', 'Cao Đẳng'),
+ ('3', 'ĐẠi Học'),
+ ('4', 'SAU ĐẠI Học');
 
-INSERT INTO `furama`.`bo_phan` (`ma_bo_phan`, `ten_bo_phan`) VALUES ('1', 'Sale-Marketing');
-INSERT INTO `furama`.`bo_phan` (`ma_bo_phan`, `ten_bo_phan`) VALUES ('2', 'Hành chính');
-INSERT INTO `furama`.`bo_phan` (`ma_bo_phan`, `ten_bo_phan`) VALUES ('3', 'Phục vụ');
-INSERT INTO `furama`.`bo_phan` (`ma_bo_phan`, `ten_bo_phan`) VALUES ('4', 'Quản lý');
+INSERT INTO furAMa.BO_PHAN (MA_bo_pHan, ten_Bo_Phan) 
+VALUES
+ ('1', 'SaLe-MARKETInG'),
+ ('2', 'Hành cHÍNH'),
+ ('3', 'Phục vỤ'),
+ ('4', 'Quản lý');
 
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('1', 'Nguyễn Văn An', '1970-11-07', '456231786', '10000000', '0901234121', 'annguyen@gmail.com', '295 Nguyễn Tất Thành, Đà Nẵng', '1', '3', '1');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('2', 'Lê Văn Bình', '1997-04-09', '654231234', '7000000', '0934212314', 'binhlv@gmail.com', '22 Yên Bái, Đà Nẵng', '1', '2', '2');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('3', 'Hồ Thị Yến', '1995-12-12', '999231723', '14000000', '0412352315', 'thiyen@gmail.com', 'K234/11 Điện Biên Phủ, Gia Lai', '1', '3', '2');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('4', 'Võ Công Toản', '1980-04-04', '123231365', '17000000', '0374443232', 'toan0404@gmail.com', '77 Hoàng Diệu, Quảng Trị', '1', '4', '4');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('5', 'Nguyễn Bỉnh Phát', '1999-12-09', '454363232', '6000000', '0902341231', 'phatphat@gmail.com', '43 Yên Bái, Đà Nẵng', '2', '1', '1');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('6', 'Khúc Nguyễn An Nghi', '2000-11-08', '964542311', '7000000', '0978653213', 'annghi20@gmail.com', '294 Nguyễn Tất Thành, Đà Nẵng', '2', '2', '3');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('7', 'Nguyễn Hữu Hà', '1993-01-01', '534323231', '8000000', '0941234553', 'nhh0101@gmail.com', '4 Nguyễn Chí Thanh, Huế', '2', '3', '2');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('8', 'Nguyễn Hà Đông', '1989-09-03', '234414123', '9000000', '0642123111', 'donghanguyen@gmail.com', '111 Hùng Vương, Hà Nội', '2', '4', '4');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('9', 'Tòng Hoang', '1982-09-03', '256781231', '6000000', '0245144444', 'hoangtong@gmail.com', '213 Hàm Nghi, Đà Nẵng', '2', '4', '4');
-INSERT INTO `furama`.`nhan_vien` (`ma_nhan_vien`, `ho_ten`, `ngay_sinh`, `so_cmnd`, `luong`, `so_dien_thoai`, `email`, `dia_chi`, `ma_vi_tri`, `ma_trinh_do`, `ma_bo_phan`) VALUES ('10', 'Nguyễn Công Đạo', '1994-01-08', '755434343', '8000000', '0988767111', 'nguyencongdao12@gmail.com', '6 Hoà Khánh, Đồng Nai', '2', '3', '2');
+INSERT INTO furama.nhaN_vIEN (MA_NHaN_VIen, ho_Ten, nGay_sInh, so_Cmnd, luOng, So_dieN_thoAi, Email, Dia_cHi, ma_vi_Tri, Ma_trinH_do, ma_Bo_phan) 
+VALUES
+ ('1', 'Nguyễn Văn An', '1970-11-07', '456231786', '10000000', '0901234121', 'annGuyen@gmail.Com', '295 NguYễn Tất Thành, Đà Nẵng', '1', '3', '1'),
+ ('2', 'Lê Văn Bình', '1997-04-09', '654231234', '7000000', '0934212314', 'binHlv@gmail.com', '22 Yên Bái, Đà Nẵng', '1', '2', '2'),
+ ('3', 'Hồ ThỊ Yến', '1995-12-12', '999231723', '14000000', '0412352315', 'Thiyen@gmail.cOm', 'K234/11 Điện Biên PHủ, Gia Lai', '1', '3', '2'),
+ ('4', 'Võ CÔng Toản', '1980-04-04', '123231365', '17000000', '0374443232', 'toan0404@gMail.com', '77 Hoàng Diệu, Quảng Trị', '1', '4', '4'),
+ ('5', 'NguyỄn Bỉnh PháT', '1999-12-09', '454363232', '6000000', '0902341231', 'phatphat@gmail.com', '43 Yên Bái, Đà Nẵng', '2', '1', '1'),
+ ('6', 'Khúc NGUyễn An Nghi', '2000-11-08', '964542311', '7000000', '0978653213', 'AnNghi20@gmail.com', '294 Nguyễn Tất Thành, Đà Nẵng', '2', '2', '3'),
+ ('7', 'NGuyễn Hữu Hà', '1993-01-01', '534323231', '8000000', '0941234553', 'nHh0101@gmaIl.COM', '4 NGuyễn Chí Thanh, Huế', '2', '3', '2'),
+ ('8', 'NgUyễn Hà ĐÔnG', '1989-09-03', '234414123', '9000000', '0642123111', 'donghaNguyEn@gmAil.cOm', '111 HùnG Vương, Hà Nội', '2', '4', '4'),
+ ('9', 'TòNg HoaNg', '1982-09-03', '256781231', '6000000', '0245144444', 'hoangtOng@gmail.com', '213 Hàm Nghi, ĐÀ NẴNg', '2', '4', '4'),
+ ('10', 'NguyễN Công Đạo', '1994-01-08', '755434343', '8000000', '0988767111', 'nguyenCongdao12@gmail.com', '6 Hoà KhÁNH, ĐồNg NaI', '2', '3', '2');
 
-INSERT INTO `furama`.`loai_khach` (`ma_loai_khach`, `ten_loai_khach_hang`) VALUES ('1', 'Diamond');
-INSERT INTO `furama`.`loai_khach` (`ma_loai_khach`, `ten_loai_khach_hang`) VALUES ('2', 'Platinium');
-INSERT INTO `furama`.`loai_khach` (`ma_loai_khach`, `ten_loai_khach_hang`) VALUES ('3', 'Gold');
-INSERT INTO `furama`.`loai_khach` (`ma_loai_khach`, `ten_loai_khach_hang`) VALUES ('4', 'Silver');
-INSERT INTO `furama`.`loai_khach` (`ma_loai_khach`, `ten_loai_khach_hang`) VALUES ('5', 'Member');
 
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('1', '5', 'Nguyễn Thị Hào', '1970-11-07', 0, '643431213', '0945423362', 'thihao07@gmail.com', '23 Nguyễn Hoàng, Đà Nẵng');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('2', '3', 'Phạm Xuân Diệu', '1992-08-08', 1, '865342123', '0954333333', 'xuandieu92@gmail.com', 'K77/22 Thái Phiên, Quảng Trị');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('3', '1', 'Trương Đình Nghệ', '1990-02-27', 1, '488645199', '0373213122', 'nghenhan2702@gmail.com', 'K323/12 Ông Ích Khiêm, Vinh');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('4', '1', 'Dương Văn Quan', '1981-07-08', 1, '543432111', '0490039241', 'duongquan@gmail.com', 'K453/12 Lê Lợi, Đà Nẵng');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('5', '4', 'Hoàng Trần Nhi Nhi', '1995-12-09', 0, '795453345', '0312345678', 'nhinhi123@gmail.com', '224 Lý Thái Tổ, Gia Lai');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('6', '4', 'Tôn Nữ Mộc Châu', '2005-12-06', 0, '732434215', '0988888844', 'tonnuchau@gmail.com', '37 Yên Thế, Đà Nẵng');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('7', '1', 'Nguyễn Mỹ Kim', '1984-04-08', 0, '856453123', '0912345698', 'kimcuong84@gmail.com', 'K123/45 Lê Lợi, Hồ Chí Minh');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('8', '3', 'Nguyễn Thị Hào', '1999-04-08', 0, '965656433', '0763212345', 'haohao99@gmail.com', '55 Nguyễn Văn Linh, Kon Tum');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('9', '1', 'Trần Đại Danh', '1994-07-01', 1, '432341235', '0643343433', 'danhhai99@gmail.com', '24 Lý Thường Kiệt, Quảng Ngãi');
-INSERT INTO `furama`.`khach_hang` (`ma_khach_hang`, `ma_loai_khach`, `ho_ten`, `ngay_sinh`, `gioi_tinh`, `so_cmnd`, `so_dien_thoai`, `email`, `dia_chi`) VALUES ('10', '2', 'Nguyễn Tâm Đắc', '1989-07-01', 1, '344343432', '0987654321', 'dactam@gmail.com', '22 Ngô Quyền, Đà Nẵng');
+INSERT INTO furamA.loai_khacH (ma_loaI_khAch, ten_loai_Khach_hang) 
+VALUES 
+('1', 'DIamond'),
+ ('2', 'Platinium'),
+ ('3', 'GOld'),
+ ('4', 'SiLVER'),
+ ('5', 'Member');
 
-INSERT INTO `furama`.`kieu_thue` (`ma_kieu_thue`, `ten_kieu_thue`) VALUES ('1', 'year');
-INSERT INTO `furama`.`kieu_thue` (`ma_kieu_thue`, `ten_kieu_thue`) VALUES ('2', 'month');
-INSERT INTO `furama`.`kieu_thue` (`ma_kieu_thue`, `ten_kieu_thue`) VALUES ('3', 'day');
-INSERT INTO `furama`.`kieu_thue` (`ma_kieu_thue`, `ten_kieu_thue`) VALUES ('4', 'hour');
+INSERT INTO FURaMa.khach_hanG (MA_KHACH_haNg, MA_loai_khaCH, Ho_tEn, ngay_sinh, giOi_tInh, sO_CMND, so_Dien_thoaI, EMAIL, DIa_chi) 
+VALUES
+('1', '5', 'NGuyễn Thị HÀO', '1970-11-07', 0, '643431213', '0945423362', 'thiHao07@gMail.com', '23 Nguyễn HoÀng, ĐÀ Nẵng'),
+('2', '3', 'PhẠm XuÂN Diệu', '1992-08-08', 1, '865342123', '0954333333', 'xuAndieu92@gMaiL.com', 'K77/22 TháI Phiên, Quảng Trị'),
+('3', '1', 'TRƯơNG ĐÌnh NGhệ', '1990-02-27', 1, '488645199', '0373213122', 'ngHenhan2702@gmaIl.com', 'K323/12 ÔNg ÍcH Khiêm, VinH'),
+('4', '1', 'DƯƠNG Văn QuAn', '1981-07-08', 1, '543432111', '0490039241', 'dUOngquan@gmail.com', 'K453/12 Lê LỢi, Đà Nẵng'),
+('5', '4', 'HOànG TRẦN NHI Nhi', '1995-12-09', 0, '795453345', '0312345678', 'nhinhI123@GMail.com', '224 LÝ Thái Tổ, GiA Lai'),
+('6', '4', 'Tôn Nữ MỘc CHÂU', '2005-12-06', 0, '732434215', '0988888844', 'tonnuchAu@gmail.com', '37 Yên Thế, Đà Nẵng'),
+('7', '1', 'Nguyễn Mỹ Kim', '1984-04-08', 0, '856453123', '0912345698', 'kimcuong84@gmAil.com', 'K123/45 Lê LợI, Hồ Chí Minh'),
+('8', '3', 'Nguyễn Thị Hào', '1999-04-08', 0, '965656433', '0763212345', 'haoHao99@gmail.com', '55 Nguyễn Văn LiNH, Kon Tum'),
+('9', '1', 'TrầN Đại Danh', '1994-07-01', 1, '432341235', '0643343433', 'dAnHHaI99@Gmail.com', '24 Lý ThƯờng KiỆt, Quảng Ngãi'),
+('10', '2', 'Nguyễn Tâm ĐắC', '1989-07-01', 1, '344343432', '0987654321', 'DACTam@GMaIl.COm', '22 Ngô Quyền, Đà Nẵng');
 
-INSERT INTO `furama`.`loai_dich_vu` (`ma_loai_dich_vu`, `ten_loai_dich_vu`) VALUES ('1', 'Villa');
-INSERT INTO `furama`.`loai_dich_vu` (`ma_loai_dich_vu`, `ten_loai_dich_vu`) VALUES ('2', 'House');
-INSERT INTO `furama`.`loai_dich_vu` (`ma_loai_dich_vu`, `ten_loai_dich_vu`) VALUES ('3', 'Room');
 
-INSERT INTO `furama`.`dich_vu` (`ma_dich_vu`, `ten_dich_vu`, `dien_tich`, `chi_phi_thue`, `so_nguoi_toi_da`, `tieu_chuan_phong`, `mo_ta_tien_nghi_khac`, `dien_tich_ho_boi`, `so_tang`, `dich_vu_mien_phi_di_kem`, `ma_kieu_thue`, `ma_loai_dich_vu`) VALUES ('1', 'Villa Beach Front', '25000', '1000000', '10', 'vip', 'Có hồ bơi', '500', '4', NULL, '3', '1');
-INSERT INTO `furama`.`dich_vu` (`ma_dich_vu`, `ten_dich_vu`, `dien_tich`, `chi_phi_thue`, `so_nguoi_toi_da`, `tieu_chuan_phong`, `mo_ta_tien_nghi_khac`, `dien_tich_ho_boi`, `so_tang`, `dich_vu_mien_phi_di_kem`, `ma_kieu_thue`, `ma_loai_dich_vu`) VALUES ('2', 'House Princess 01', '14000', '5000000', '7', 'vip', 'Có thêm bếp nướng', NULL, '3', NULL, '2', '2');
-INSERT INTO `furama`.`dich_vu` (`ma_dich_vu`, `ten_dich_vu`, `dien_tich`, `chi_phi_thue`, `so_nguoi_toi_da`, `tieu_chuan_phong`, `mo_ta_tien_nghi_khac`, `dien_tich_ho_boi`, `so_tang`, `dich_vu_mien_phi_di_kem`, `ma_kieu_thue`, `ma_loai_dich_vu`) VALUES ('3', 'Room Twin 01', '5000', '1000000', '2', 'normal', 'Có tivi', NULL, NULL, '1 Xe máy, 1 Xe đạp', '4', '3');
-INSERT INTO `furama`.`dich_vu` (`ma_dich_vu`, `ten_dich_vu`, `dien_tich`, `chi_phi_thue`, `so_nguoi_toi_da`, `tieu_chuan_phong`, `mo_ta_tien_nghi_khac`, `dien_tich_ho_boi`, `so_tang`, `dich_vu_mien_phi_di_kem`, `ma_kieu_thue`, `ma_loai_dich_vu`) VALUES ('4', 'Villa No Beach Front', '22000', '9000000', '8', 'normal', 'Có hồ bơi', '300', '3', NULL, '3', '1');
-INSERT INTO `furama`.`dich_vu` (`ma_dich_vu`, `ten_dich_vu`, `dien_tich`, `chi_phi_thue`, `so_nguoi_toi_da`, `tieu_chuan_phong`, `mo_ta_tien_nghi_khac`, `dien_tich_ho_boi`, `so_tang`, `dich_vu_mien_phi_di_kem`, `ma_kieu_thue`, `ma_loai_dich_vu`) VALUES ('5', 'House Princess 02', '10000', '4000000', '5', 'normal', 'Có thêm bếp nướng', NULL, '2', NULL, '3', '2');
-INSERT INTO `furama`.`dich_vu` (`ma_dich_vu`, `ten_dich_vu`, `dien_tich`, `chi_phi_thue`, `so_nguoi_toi_da`, `tieu_chuan_phong`, `mo_ta_tien_nghi_khac`, `dien_tich_ho_boi`, `so_tang`, `dich_vu_mien_phi_di_kem`, `ma_kieu_thue`, `ma_loai_dich_vu`) VALUES ('6', 'Room Twin 02', '3000', '900000', '2', 'normal', 'Có tivi', NULL, NULL, '1 Xe máy', '4', '3');
 
-INSERT INTO `furama`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`, `ten_dich_vu_di_kem`, `gia`, `don_vi`, `trang_thai`) VALUES ('1', 'Karaoke', '10000', 'giờ', 'tiện nghi, hiện tại');
-INSERT INTO `furama`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`, `ten_dich_vu_di_kem`, `gia`, `don_vi`, `trang_thai`) VALUES ('2', 'Thuê xe máy', '10000', 'chiếc', 'hỏng 1 xe');
-INSERT INTO `furama`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`, `ten_dich_vu_di_kem`, `gia`, `don_vi`, `trang_thai`) VALUES ('3', 'Thuê xe đạp', '20000', 'chiếc', 'tốt');
-INSERT INTO `furama`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`, `ten_dich_vu_di_kem`, `gia`, `don_vi`, `trang_thai`) VALUES ('4', 'Buffet buổi sáng', '15000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
-INSERT INTO `furama`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`, `ten_dich_vu_di_kem`, `gia`, `don_vi`, `trang_thai`) VALUES ('5', 'Buffet buổi trưa', '90000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
-INSERT INTO `furama`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`, `ten_dich_vu_di_kem`, `gia`, `don_vi`, `trang_thai`) VALUES ('6', 'Buffet buổi tối', '16000', 'suất', 'đầy đủ đồ ăn, tráng miệng');
+INSERT INTO fUrama.kiEu_thue (ma_kieu_thue, ten_kieu_tHue)
+ VALUES
+ ('1', 'year'),
+ ('2', 'mOnth'),
+ ('3', 'dAY'),
+ ('4', 'hoUr');
 
+INSERT INTO furama.loAi_Dich_vu (Ma_LOAI_dIch_Vu, tEn_loAI_DICh_VU) 
+VALUES
+ ('1', 'Villa'),
+ ('2', 'HoUse'),
+ ('3', 'ROom');
+
+INSERT INTO furamA.DICH_Vu (ma_dich_vu, TEN_DICH_vU, dIen_tich, chI_PhI_thue, sO_ngUOi_Toi_da, TieU_chUaN_PHONG, MO_TA_TiEN_NGHI_KHaC, dien_ticH_hO_boi, so_tAng, Dich_vu_mieN_phi_dI_kEM, MA_kIeU_THUE, mA_LOai_dIcH_VU) 
+VALUES
+ ('1', 'VIlLa BEACH FrONT', '25000', '1000000', '10', 'vip', 'Có hỒ bơi', '500', '4', NULL, '3', '1'),
+ ('2', 'House Princess 01', '14000', '5000000', '7', 'vip', 'Có tHêm bếp nướng', NULL, '3', NULL, '2', '2'),
+ ('3', 'ROOm Twin 01', '5000', '1000000', '2', 'normal', 'CÓ tivI', NULL, NULL, '1 Xe máY, 1 Xe đạp', '4', '3'),
+ ('4', 'VILlA NO BeaCH FROnt', '22000', '9000000', '8', 'nOrmal', 'Có hồ bƠi', '300', '3', NULL, '3', '1'),
+ ('5', 'HOUSE PRINCEss 02', '10000', '4000000', '5', 'normal', 'Có tHêm bếp Nướng', NULL, '2', NULL, '3', '2'),
+ ('6', 'Room TwiN 02', '3000', '900000', '2', 'Normal', 'Có Tivi', NULL, NULL, '1 Xe mÁy', '4', '3');
+
+
+
+INSERT INTO fUrama.dIch_vU_DI_KEm (MA_dicH_vu_di_Kem, ten_dich_vu_di_kEm, gIa, Don_vI, traNg_thAi) 
+VALUES
+ ('1', 'Karaoke', '10000', 'GIỜ', 'tiỆN NGHI, hIỆn TạI'),
+ ('2', 'Thuê xe máy', '10000', 'Chiếc', 'hỎng 1 xe'),
+ ('3', 'ThUê XE ĐạP', '20000', 'chiẾc', 'tốt'),
+ ('4', 'BuFFET buổI sÁng', '15000', 'Suất', 'đầy đủ đồ ĂN, tráng miệng'),
+ ('5', 'Buffet buổI trưa', '90000', 'SUất', 'đầy đủ Đồ ăn, tRÁng miỆng'),
+ ('6', 'Buffet buổI tối', '16000', 'Suất', 'đầy đủ đồ ăn, tRáng miệng');
+
+
+
+INSERT INTO fUramA.hop_dong (ma_hop_Dong, ngaY_lam_hop_dOng, ngay_Ket_thuC, tien_dat_coc, ma_nhaN_vien, mA_khach_haNg, ma_dich_vu) 
+VALUES
+ ('1', '2020-12-08', '2020-12-08', '0', '3', '1', '3'),
+ ('2', '2020-07-14', '2020-07-21', '200000', '7', '3', '1'),
+ ('3', '2021-03-15', '2021-03-17', '50000', '3', '4', '2'),
+ ('4', '2021-01-14', '2021-01-18', '100000', '7', '5', '5'),
+ ('5', '2021-07-14', '2021-07-15', '0', '7', '2', '6'),
+ ('6', '2021-06-01', '2021-06-03', '0', '7', '7', '6'),
+ ('7', '2021-09-02', '2021-09-05', '100000', '7', '4', '4'),
+ ('8', '2021-06-17', '2021-06-18', '150000', '3', '4', '1'),
+ ('9', '2020-11-19', '2020-11-19', '0', '3', '4', '3'),
+ ('10', '2021-04-12', '2021-04-14', '0', '10', '3', '5'),
+ ('11', '2021-04-25', '2021-04-25', '0', '2', '2', '1'),
+ ('12', '2021-05-25', '2021-05-27', '0', '7', '10', '1');
+
+
+
+INSERT INTO Furama.hop_donG_chi_TiET (mA_HoP_dOng_cHI_tIet, ma_hOp_dong, Ma_dich_Vu_di_Kem, so_luOng) 
+VALUES
+ ('1', '2', '4', '5'),
+ ('2', '2', '5', '8'),
+ ('3', '2', '6', '15'),
+ ('4', '3', '1', '1'),
+ ('5', '3', '2', '11'),
+ ('6', '1', '3', '1'),
+ ('7', '1', '2', '2'),
+ ('8', '12', '2', '2');
+
+-- cau 2
+select * from nhAn_vien wherE HO_TEN RegEXP '^[HTK]' and cHAR_LENgTH(Ho_ten)<15;
+
+-- cau 3
+SELECT 
+    *
+FROM
+    khach_hang
+WHERE
+    (dia_Chi LIKE '%Đà NẴng'
+        OR Dia_chi LIKE '%QuẢng TRỊ')
+        AND ((YEAR(NOW()) - YEAR(Ngay_sinh)) > 18
+        AND (YEAR(NOW()) - YEAR(ngAy_siNH)) < 50);
+        
+-- Cau 4
+SELECT 
+    Kh.Ma_KHAch_hang,
+    KH.Ho_TEN,
+    COUNT(HD.Ma_khACH_HANG) AS so_lan_DAT_PHONG
+FROM
+    khaCH_HAng kh
+        JOIN
+    LoAI_Khach lk ON kh.ma_LOAI_khacH = lk.ma_LOAi_khach
+        JOIN
+    Hop_dong hD ON kh.ma_khach_hang = hd.ma_kHACh_HANG
+WHERE
+    KH.MA_loai_khaCH = 1
+GROUP BY KH.hO_TEN
+ORDER BY SO_LAn_dat_phoNG
+;
+
+-- cau 5
+select
+	kh.ma_KHACH_hang,
+	Kh.ho_ten, lk.Ten_loai_khach_Hang,
+	HD.MA_hOp_dong, dv.teN_DIch_vu,
+	hd.ngay_laM_HOp_dong,
+	hd.ngay_ket_thuc,
+	(DV.chi_phi_thue+IFNULL(hdcT.so_luong*dvdk.gia,0)) as tong_tien
+from KHACh_hang kh
+join loAI_khAch lk on lk.ma_loaI_khach = kh.ma_LOAI_khach
+Left join hop_dOnG HD ON KH.ma_khach_hANG = HD.ma_khach_hang
+left join dich_VU DV on hD.ma_dich_vu = dv.mA_dich_Vu
+lEft join hop_dong_chI_tieT hdct on hd.ma_Hop_dong = hDct.mA_hop_dong
+left joIn diCh_vu_di_kem dVdk on hdct.ma_dich_VU_DI_Kem = dvdk.ma_Dich_Vu_dI_KEm
+Group by kh.MA_Khach_hang,hd.ma_HOP_dong
+order by KH.ma_khach_hang;
+
+
+-- cAu 6 
+select dv.MA_dICH_vu, dv.ten_diCH_vu,dv.dien_tich,dV.chI_phi_thue,dv.tEN_DiCH_Vu,hd.ngay_laM_hop_dong
+from kHach_hang kh
+joiN HOp_DONg hd on kh.ma_khach_hang = hd.ma_khach_hanG
+join dich_vu dv oN HD.MA_Dich_vu = dv.ma_dich_vU
+join Loai_dich_vu ldv ON dv.ma_loai_dich_vu = ldv.MA_LoAI_diCh_vu
+where dv.ma_dich_vu NOT IN (SELECT 
+            hd.ma_dich_vu
+        FROM
+            Hop_dong hd
+        WHERE
+            (hd.ngAy_lam_hop_dOng BETWEEN '2021-01-01' AND '2021-03-31')
+                OR (Hd.ngay_ket_thuC BETWEEN '2021-01-01' AND '2021-03-31'))
+GROUP BY hD.ma_dich_vu;
+;
+
+-- cau 6 cach 2
+SELECT ma_Dich_vu, ten_dich_vu, Dien_tich,chi_phi_THUE,teN_loai_dich_VU
+FROM(
+SELECt  distinct ten_Dich_vu,hop_dong.ma_DICH_vu,ngay_lam_hop_dong, dich_vu.diEN_TIch, dich_vu.cHi_Phi_thue,loai_dich_VU.TEN_loai_dich_vu aS Ten_loai_dich_Vu
+FROM hop_dong
+  JOIN  dich_vu on hop_DONG.Ma_dich_vu = diCH_vu.ma_dich_vu
+  JOIN lOAi_dIch_vu on dich_vu.ma_loai_dich_vU = LOai_dich_vu.Ma_loai_dich_Vu
+GROUP BY ten_dich_vu
+) AS t1
+WHERE NOT (MONTH(NGAY_laM_HOP_DOng) in (1,2,3) AND YEAR(ngay_lam_hop_dong) =2021);
+
+-- cau 7
+SELECT 
+     dv.mA_dich_vu,
+    dv.ten_dich_vu,
+    dv.dien_tICh,
+    dv.so_nguoi_TOI_da,
+    dv.CHI_phi_thue,
+    ldv.ten_loai_dich_vU
+FROM
+    dich_vu dv
+        JOIN
+    hoP_dong hd ON dv.ma_dich_vu = hd.ma_dich_vU
+        JOIN
+    LOAi_Dich_vu ldv ON dV.ma_lOAI_DiCH_vU = LDV.ma_loai_dich_vu
+WHERE
+    DV.MA_dICH_Vu IN (SELECT 
+            hd.ma_dich_VU
+        FROM
+            hop_doNg hd
+        WHERE
+            YEAR(hD.ngay_lam_hop_dOng) = '2020'
+                OR YEAR(hd.ngay_keT_THuc) = '2020')
+        AND DV.ma_dich_vu NOT IN (SELECT 
+            hd.ma_dich_vu
+        FROM
+            hop_dONg hD
+        WHERE
+            YEAR(hd.ngaY_LAM_hop_doNg) = '2021'
+                OR YEAR(hD.ngay_ket_thuc) = '2021')
+GROUP BY dv.ma_dich_vu;
+
+-- caU 8
+SELECT DISTINCT
+    hO_ten
+FROM
+    khaCh_hang;
+    
+-- cau 9
+SELECT 
+    MONTH(hd.ngay_laM_Hop_dong) AS `thanG`,
+    COUNT(MONTH(Hd.NgAY_LAM_hop_dong)) AS so_luong_khach_hang
+FROM
+    hop_dong hd
+WHERE
+    YEAR(hd.NGAY_lam_hop_dong) = '2021'
+GROUP BY `thang`
+ORDER BY `thang`;
+
+-- cau 10
+SELECT 
+    hd.ma_hoP_Dong,
+    HD.NGaY_lam_hop_dong,
+    hd.ngay_KET_THuC,
+    Hd.tien_dat_cOC,
+    SUM(hdct.so_luong) AS so_luONG_DIch_vu_DI_KEM
+FROM
+    hop_dong hD
+        LEFT JOIN
+    HOP_DOng_chi_tiet hdct ON HD.MA_hop_dong = hdct.ma_hOP_Dong
+GROUP BY hd.mA_HOP_dong;
