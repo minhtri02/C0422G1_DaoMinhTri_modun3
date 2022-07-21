@@ -108,11 +108,33 @@ WHERE
 GROUP BY dv.ma_dich_vu;
 
 -- caU 8
+-- cách 1
 SELECT DISTINCT
     hO_ten
 FROM
     khaCh_hang;
     
+-- cách 2
+SELECT 
+        ho_ten
+    FROM
+        khach_hang
+    GROUP BY ho_ten
+    HAVING COUNT(*) > 1 ;
+    
+-- cách 3
+SELECT 
+        ho_ten
+    FROM
+        khach_hang
+        union 
+        SELECT 
+        ho_ten
+    FROM
+        khach_hang;
+        
+        
+        
 -- cau 9
 SELECT 
     MONTH(hd.ngay_laM_Hop_dong) AS `thanG`,
@@ -123,6 +145,7 @@ WHERE
     YEAR(hd.NGAY_lam_hop_dong) = '2021'
 GROUP BY `thang`
 ORDER BY `thang`;
+
 
 -- cau 10
 SELECT 
@@ -200,6 +223,7 @@ having so_luong = 1;
 select nv.*, count(nv.ma_nhan_vien) as so_luong
 from nhan_vien nv
 join hop_dong hd on nv.ma_nhan_vien = hd.ma_nhan_vien
+where year(hd.ngay_lam_hop_dong) in ('2020', '2021') 
 group by nv.ma_nhan_vien
 having so_luong<=3;
 
@@ -217,31 +241,113 @@ set sql_safe_updates =1;
 
 -- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
 -- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+SET sql_safe_updates =0;
 UPDATE khach_hang 
 SET 
     ma_loai_khach = 1
 WHERE
-    ma_khach_hang = (SELECT 
-            table1.ma_khach_hang
+    ma_khach_hang IN (SELECT 
+            temp.ma_khach_hang
         FROM
             (SELECT 
-                ten_loai_khach,
-                    khach_hang.ma_khach_hang,
-                    CASE
-                        WHEN hop_dong_chi_tiet.so_luong IS NULL THEN SUM(dich_vu.chi_phi_thue)
-                        ELSE SUM(dich_vu.chi_phi_thue + hop_dong_chi_tiet.so_luong * dich_vu_di_kem.gia)
-                    END AS tong_tien
+                hd.ma_khach_hang,
+                    (dv.chi_phi_thue + SUM(IFNULL(hdct.so_luong * dvdk.gia, 0))) AS tong_tien
             FROM
-                loai_khach
-            LEFT JOIN khach_hang ON loai_khach.ma_loai_khach = khach_hang.ma_loai_khach
-            LEFT JOIN hop_dong ON hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
-            LEFT JOIN dich_vu ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
-            LEFT JOIN hop_dong_chi_tiet ON hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
-            LEFT JOIN dich_vu_di_kem ON dich_vu_di_kem.ma_dich_vu_di_kem = hop_dong_chi_tiet.ma_dich_vu_di_kem
-            GROUP BY CASE
-                WHEN hop_dong.ma_hop_dong IS NULL THEN ho_ten
-                ELSE hop_dong.ma_hop_dong
-            END) AS table1
-        WHERE
-            table1.tong_tien > 10000000
-                AND table1.ten_loai_khach = 'platinium');
+                khach_hang kh
+            LEFT JOIN hop_dong hd ON kh.ma_khach_hang = hd.ma_khach_hang
+            LEFT JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong = hd.ma_hop_dong
+            LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
+            LEFT JOIN dich_vu dv ON dv.ma_dich_vu = hd.ma_dich_vu
+            LEFT JOIN loai_khach lk ON lk.ma_loai_khach = kh.ma_loai_khach
+            GROUP BY hd.ma_hop_dong , kh.ma_khach_hang
+            HAVING tong_tien > 1000000) temp);
+SET sql_safe_updates =1;
+
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
+set sql_safe_updates = 0;
+ set foreign_key_checks =0;
+delete 
+from khach_hang
+where ma_khach_hang in (
+	select hd.ma_khach_hang
+	from hop_dong hd
+	where year(hd.ngay_lam_hop_dong) < '2021');
+set foreign_key_checks =1;
+set sql_safe_updates = 1;
+SELECT 
+    *
+FROM
+    khach_hang;
+    
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+set sql_safe_updates = 0;
+update  dich_vu_di_kem 
+set gia = gia*2
+where  ma_dich_vu_di_kem in (
+select ma_dich_vu_di_kem
+from  hop_dong_chi_tiet hdct
+	join 
+    hop_dong hd on hd.ma_hop_dong = hdct.ma_hop_dong
+where  year(hd.ngay_lam_hop_dong) = '2020' and so_luong > 10)
+;
+ set sql_safe_updates = 1;
+ 
+ 
+ -- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống,
+ -- thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+ 
+select ma_khach_hang,ho_ten,email,so_dien_thoai,ngay_sinh,dia_chi
+from khach_hang 
+union
+select ma_nhan_vien,ho_ten,email,so_dien_thoai,ngay_sinh,dia_chi
+from nhan_vien;
+
+
+-- 21.	Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là “yên bái” 
+-- và đã từng lập hợp đồng cho một hoặc nhiều khách hàng bất kì với ngày lập hợp đồng là “12/12/2019”.
+
+create view v_nhan_vien AS
+SELECT nv.*
+FROM nhan_vien nv
+	join hop_dong hd on hd.ma_nhan_vien = nv.ma_nhan_vien
+where dia_chi like '%yên bái%' 
+	and nv.ma_nhan_vien in (select hop_dong.ma_nhan_vien
+		from hop_dong
+		where (ngay_lam_hop_dong) ='2021-04-25'
+	);
+
+select *
+from v_nhan_vien;
+    
+    
+-- 22.	Thông qua khung nhìn v_nhan_vien thực hiện cập nhật địa chỉ thành “Liên Chiểu” 
+-- đối với tất cả các nhân viên được nhìn thấy bởi khung nhìn này.
+ set sql_safe_updates = 0;
+update v_nhan_vien
+set dia_chi = replace(dia_chi,'Yên Bái','Liên Chiểu');
+ set sql_safe_updates = 1;
+ 
+ 
+ -- 23.	Tạo Stored Procedure sp_xoa_khach_hang dùng để xóa thông tin của một khách hàng nào đó 
+ -- với ma_khach_hang được truyền vào như là 1 tham số của sp_xoa_khach_hang.
+ delimiter $$
+ create procedure sp_xoa_khach_hang(in id int)
+ begin
+  set sql_safe_updates =0;
+  set foreign_key_checks = 0;
+  delete from khach_hang where ma_khach_hang = id;
+  set foreign_key_checks = 1;
+  set sql_safe_updates =1;
+ end$$
+ delimiter ;
+ 
+ call sp_xoa_khach_hang(5);
+ 
+ -- 24.Tạo Stored Procedure sp_them_moi_hop_dong dùng để thêm mới vào bảng hop_dong với yêu cầu 
+ -- sp_them_moi_hop_dong phải thực hiện kiểm tra tính hợp lệ của dữ liệu bổ sung, 
+ -- với nguyên tắc không được trùng khóa chính và đảm bảo toàn vẹn tham chiếu đến các bảng liên quan.
+ 
+ -- delimiter $$
+--  create procedure sp_them_moi_hop_dong(in )
+--  
+--  delimiter;
