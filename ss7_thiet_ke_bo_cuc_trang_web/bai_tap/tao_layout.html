@@ -33,11 +33,39 @@
             display: inline;
             margin: 5px;
         }
+        .row{
+            /*display: flex;*/
+            /*float: left;*/
+            /*height: 50px;*/
+            padding:0;
+            margin:0;
+            background-color: deepskyblue;
+            border: 1px solid #CDCDCD;
+            height: auto;
+        }
+        [class*="col-"]{
+            float: left;
+            padding: 15px;
+        }
+        .col-l-1 {width: 8.33333%;}
+        .col-l-2 {width: 16.66667%;}
+        .col-l-3 {width: 25%;}
+        .col-l-4 {width: 33.33333%;}
+        .col-l-5 {width: 41.66667%;}
+        .col-l-6 {width: 50%;}
+        .col-l-7 {width: 58.33333%;}
+        .col-l-8 {width: 66.66667%;}
+        .col-l-9 {width: 75%;}
+        .col-l-10 {width: 83.33333%;}
+        .col-l-11 {width: 91.66667%;}
+        .col-l-12 {width: 100%;}
     </style>
-    <h1>Monday Times</h1>
-</header>
 
-<nav>
+</header>
+<nav class="row" style="background-color: #333333; color: #C3C7DB">
+    <h1 >Monday Times</h1>
+</nav>
+<nav class="row" style="background-color: white">
     <ul>
         <li>News</li>
         <li>Sports</li>
@@ -45,21 +73,21 @@
     </ul>
 </nav>
 
-<section>
-    <h2>News Section</h2>
-    <article>
+<section class="row" style="background-color: #7EA1C4 ; height: 430px; position: relative">
+    <h2 class="col-l-12">News Section</h2>
+    <article class="col-l-12">
         <h2>News Article</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
     </article>
-    <article>
+    <article class="col-l-12">
         <h2>News Article</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
     </article>
 </section>
 
-<footer>
+<footer class="row" style="color: #C3C7DB ; background-color: #95BEE8; height: 50px">
     <p>&copy; 2014 Monday Times. All rights reserved.</p>
 </footer>
 </html>
