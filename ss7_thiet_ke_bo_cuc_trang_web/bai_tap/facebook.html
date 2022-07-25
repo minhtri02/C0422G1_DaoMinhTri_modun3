@@ -4,28 +4,69 @@
     <meta charset="UTF-8">
     <title>FACEBOOK</title>
     <style>
-        header{
+        body {
+            border: solid 2px black;
+        }
+
+        header {
             clear: left;
             border: solid 1px black;
 
         }
-        header button img{
+
+        header button img {
             text-align: center;
-            width: 50px; height: 50px
+            width: 50px;
+            height: 50px
+        }
+
+        article {
+            border: solid 1px black;
+            height: 600px;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+        i{
+            font-size: 40px ;
+            color:  #C3C7DB;
+            margin: 0 10px 0 10px;
         }
     </style>
+    <link rel="stylesheet" href="FB.CSS.css">
+    <script src="https://kit.fontawesome.com/d6e19ea644.js"></script>
 </head>
 <body>
-<header>
-    <img style="width: 50px ; height: 50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/800px-Facebook_Logo_%282019%29.png">
-    <input type="text" style="margin: 5px ;">
-    <button type="button"><img  src="img_fb\home2.jpg"></button>
+<header class="row">
+    <nav class="col-l-3" style="display: flex;">
+        <i  class="fa-brands fa-facebook"></i>
+        <input type="text" style="margin: 5px ; border-radius: 30px ">
+    </nav>
+    <nav class="col-l-6" style="text-align: center">
+        <i  class="fa-solid fa-house"></i>
+        <i class="fa-light fa-tv-music"></i>
+        <i class="fa-solid fa-user-group"></i>
+
+    </nav>
+    <nav class="col-l-3" >
+        <i class="fa-solid fa-messages"></i>
+        <i style=" float: right ; color: #C3C7DB" class="fa-solid fa-user-tie"></i>
+        <i style=" float: right ; color: #C3C7DB" class="fa-solid fa-bell"></i>
+
+
+    </nav>
 </header>
-<aside>
-
+<aside class="row">
+    <article class="col-l-3"></article>
+    <article class="col-l-6"></article>
+    <article class="col-l-3"></article>
 </aside>
-<footer>
-
+<footer class="row">
+    <nav class="col-l-12" style="border: solid 1px black;height: 50px">
+        footer
+    </nav>
 </footer>
 </body>
 </html>
