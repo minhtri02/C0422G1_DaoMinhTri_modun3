@@ -4,21 +4,55 @@
     <meta charset="UTF-8">
     <title>Tạo gallery đơn giản sử dụng Bootstrap</title>
     <link rel="stylesheet" href="bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <style>
+        p {
+            margin: 0;
+            font-size: 14px;
+            font-family: Cambria;
+        }
+    </style>
 </head>
 <body>
-<h2>Responsive Image Gallery</h2>
-<h4>Resize the browser window to see the effect.</h4>
-<div class="table-responsive">
-    <img src="https://demo.codegym.vn/web/15/gallery/img_fjords.jpg">
-</div>
-<div class="table-responsive">
-    <img src="https://demo.codegym.vn/web/15/gallery/img_fjords.jpg">
-</div>
-<div class="table-responsive">
-    <img src="https://demo.codegym.vn/web/15/gallery/img_fjords.jpg">
-</div>
-<div class="table-responsive">
-    <img src="https://demo.codegym.vn/web/15/gallery/img_fjords.jpg">
+
+<div class="row container-fluid ">
+    <div class="col-12">
+        <h2>Responsive Image Gallery</h2>
+        <h4>Resize the browser window to see the effect.</h4>
+    </div>
+
+    <div class="col-sm-6 col-md-3 px-1">
+        <div style="border: #ccc 1px solid ;height: auto">
+            <a href="https://demo.codegym.vn/web/15/gallery/img_fjords.jpg">
+                <img class="card-img-top" src="https://demo.codegym.vn/web/15/gallery/img_fjords.jpg"></a>
+            <div><p class="border container-fluid">Add a description of the image here</p></div>
+        </div>
+
+    </div>
+    <div class="col-sm-6 col-md-3 px-1">
+        <div style="border: #ccc 1px solid ;height: auto">
+            <a href="https://demo.codegym.vn/web/15/gallery/img_forest.jpg">
+                <img class="card-img-top" src="https://demo.codegym.vn/web/15/gallery/img_forest.jpg"></a>
+            <div><p class="border container-fluid">Add a description of the image here</p></div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 px-1">
+        <div style="border: #ccc 1px solid ;height: auto">
+            <a href="https://demo.codegym.vn/web/15/gallery/img_lights.jpg">
+                <img class="card-img-top" src="https://demo.codegym.vn/web/15/gallery/img_lights.jpg"></a>
+            <div><p class="container-fluid border">Add a description of the image here</p></div>
+        </div>
+    </div>
+    <div class="col-sm-6  col-md-3 px-1">
+        <div style="border: #ccc 1px solid ;height: auto">
+            <a href="https://demo.codegym.vn/web/15/gallery/img_mountains.jpg">
+                <img class="card-img-top" src="https://demo.codegym.vn/web/15/gallery/img_mountains.jpg"></a>
+            <div><p class="container-fluid border">Add a description of the image here</p></div>
+        </div>
+    </div>
+    <div><br>
+        <p>This example use media queries to re-arrange the images on different screen sizes: for screens larger than
+            700px wide, it will show four images side by side, for screens smaller than 700px, it will show two images
+            side by side. For screens smaller than 500px, the images will stack vertically (100%).</p></div>
 </div>
 </body>
 <script src="bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
