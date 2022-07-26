@@ -1,17 +1,17 @@
-/*.row{*/
-/*    !* dùng cho thẻ div trong 1 row sẽ nổi lên*!*/
-/*    display: flex;*/
-/*    !*Nếu như không đủ độ rộng thì nó sẽ rớt xuống*!*/
-/*    flex-wrap: wrap;*/
-/*}*/
+.row{
+    /* dùng cho thẻ div trong 1 row sẽ nổi lên*/
+    display: flex;
+    /*Nếu như không đủ độ rộng thì nó sẽ rớt xuống*/
+    flex-wrap: wrap;
+}
 *{
     box-sizing: border-box;
 }
-.row::after{
-    content: "";
-    clear: both;
-    display: block;
-}
+/*.row::after{*/
+/*    content: "";*/
+/*    clear: both;*/
+/*    display: block;*/
+/*}*/
 [class*="col-"]{
     float: left;
     padding: 15px;
