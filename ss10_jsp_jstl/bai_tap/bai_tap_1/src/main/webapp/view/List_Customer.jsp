@@ -10,11 +10,23 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        table td{
+            border-top: 1px solid lightsteelblue;
+        }
+        table{
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<table border="1">
+<table >
     <tr>
-        <th><h1>Danh sách khách hàng</h1></th>
+        <th colspan="4"><h1>Danh sách khách hàng</h1></th>
     </tr>
     <tr>
         <th>Tên</th>
@@ -27,7 +39,7 @@
             <td>${customemr.name}</td>
             <td>${customemr.birtDay}</td>
             <td>${customemr.address}</td>
-            <td>${customemr.img}</td>
+            <td><img width="150px" height="150px" src="${customemr.img}" ></td>
         </tr>
     </c:forEach>
 </table>
