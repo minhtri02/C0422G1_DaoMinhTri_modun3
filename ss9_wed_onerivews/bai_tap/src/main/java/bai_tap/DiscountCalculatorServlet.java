@@ -14,6 +14,7 @@ public class DiscountCalculatorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         int price = Integer.parseInt(request.getParameter("price"));
         int discount = Integer.parseInt(request.getParameter("discount"));
         String description = request.getParameter("Description");
