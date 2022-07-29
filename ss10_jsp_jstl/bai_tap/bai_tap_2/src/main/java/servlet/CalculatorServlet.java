@@ -1,5 +1,7 @@
+package servlet;
+
 import exception.UseException;
-import model.Calculator;
+import Service.Calculator;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,12 +20,13 @@ public class CalculatorServlet extends HttpServlet {
         double first = Double.parseDouble(request.getParameter("firstOperand"));
         double second = Double.parseDouble(request.getParameter("secondOperand"));
         String operator = request.getParameter("selectOperator");
-        double resufl =0;
+        String resufl="";
         try {
              resufl =  Calculator.calculator(first,second,operator);
         } catch (UseException e) {
             e.printStackTrace();
         }
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/ResuflCalculator.jsp");
         request.setAttribute("resufl",resufl);
         requestDispatcher.forward(request,response);
