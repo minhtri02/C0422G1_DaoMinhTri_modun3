@@ -1,7 +1,7 @@
 package servlet;
 
 import exception.UseException;
-import Service.Calculator;
+import Service.CalculatorService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,7 +22,7 @@ public class CalculatorServlet extends HttpServlet {
         String operator = request.getParameter("selectOperator");
         String resufl="";
         try {
-             resufl =  Calculator.calculator(first,second,operator);
+             resufl =  CalculatorService.calculator(first,second,operator);
         } catch (UseException e) {
             e.printStackTrace();
         }

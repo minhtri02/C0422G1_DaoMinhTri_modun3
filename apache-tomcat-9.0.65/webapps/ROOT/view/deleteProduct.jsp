@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/Product?action=delete&iid=${id}" method="post">
+<form action="/Product?action=delete&id=${id}" method="post">
 <fieldset style="width: 350px">
     <legend>Bạn có chắc là muốn xoá sản phẩm ${id} này không</legend>
     <table>

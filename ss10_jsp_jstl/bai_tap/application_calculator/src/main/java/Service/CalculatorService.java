@@ -2,7 +2,7 @@ package Service;
 
 import exception.UseException;
 
-public class Calculator {
+public class CalculatorService {
 
 
     public static String calculator(double first, double second, String operator) throws UseException {

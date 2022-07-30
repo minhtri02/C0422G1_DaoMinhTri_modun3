@@ -40,11 +40,16 @@ public class ProductReponsitory {
 
 
     public void delete(int id) {
-        for (Product p: productList) {
-            if (p.getId()==id){
-                productList.remove(p);
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId() == id){
+                productList.remove(productList.get(i));
             }
         }
+//        for (Product p: productList) {
+//            if (p.getId()==id){
+//                productList.remove(p);
+//            }
+//        }
     }
 
 

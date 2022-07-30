@@ -169,7 +169,12 @@ public class ProductServlet extends HttpServlet {
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         String flag = request.getParameter("deleteResutl");
-        int id = Integer.parseInt(request.getParameter("iid"));
+        int id =0;
+        try{
+             id = Integer.parseInt(request.getParameter("id"));
+        }catch (Exception e){
+            listProduct(request,response);
+        }
         if (flag.equals("yes")){
             productService.delete(id);
             listProduct(request,response);
@@ -177,6 +182,7 @@ public class ProductServlet extends HttpServlet {
             listProduct(request,response);
         }else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/deleteProduct.jsp");
+            request.setAttribute("id",id);
             request.setAttribute("resutl","Bạn phải nhập yes or no");
             try {
                 requestDispatcher.forward(request,response);
