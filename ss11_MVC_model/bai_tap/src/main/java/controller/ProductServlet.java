@@ -151,13 +151,15 @@ public class ProductServlet extends HttpServlet {
     private void findOfNameProduct(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         Product product=productService.findOfName(name);
+        List<Product> productList = productService.display();
+        request.setAttribute("productList",productList);
         if (product == null){
             String error = "Không có sản phẩm tên này";
             request.setAttribute("error",error);
         }else{
             request.setAttribute("product",product);
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/FindByName.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list_product.jsp");
         try {
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {

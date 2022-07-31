@@ -12,10 +12,11 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+<body >
 <h1>Danh sách sản phẩm</h1>
 <a href="/Product?action=add">Thêm sản phẩm</a><br><br>
-    <table border="1">
+
+    <table border="1" style="text-align: center">
 
         <tr>
             <th>STT</th>
@@ -39,6 +40,43 @@
         </c:forEach>
     </table>
 <br>
-<a href="/Product?action=findOfName">Tìm sản phẩm theo tên</a>
+<%--<a href="/Product?action=findOfName">Tìm sản phẩm theo tên</a>--%>
+<form action="/Product?action=findOfName" method="post">
+    <fieldset style="width: 350px">
+        <legend>Tìm kiếm sản phẩm theo tên</legend>
+        <input type="text" name="name">
+        <input type="submit">
+        <table>
+            <tr>
+                <th>Mã sản phẩm: </th>
+                <td><p>${product.id}</p></td>
+            </tr>
+            <tr>
+                <th>Tên sản phẩm: </th>
+                <td><p>${product.name}</p></td>
+            </tr>
+            <tr>
+                <th>Giá sản phẩm: </th>
+                <td><p>${product.price}</p></td>
+
+            </tr>
+            <tr>
+                <th>Mô tả sản phẩm: </th>
+                <td><p>${product.describe}</p></td>
+            </tr>
+            <tr>
+                <th>Nơi sản xuất sản phẩm: </th>
+                <td>
+                    <p>${product.producer}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="/Product">Quay về danh sách sản phẩm</a></td>
+            </tr>
+        </table>
+    </fieldset>
+    <p style="color: red">${error}</p>
+</form>
+
 </body>
 </html>

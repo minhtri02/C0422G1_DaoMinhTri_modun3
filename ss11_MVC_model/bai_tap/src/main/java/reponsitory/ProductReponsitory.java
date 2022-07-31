@@ -14,7 +14,7 @@ public class ProductReponsitory {
         productList.add(new Product(3,"555",34000,"co hai cho suc khoe","VN"));
         productList.add(new Product(4,"essel",24000,"co hai cho suc khoe","VN"));
         productList.add(new Product(5,"sai gon",14000,"co hai cho suc khoe","VN"));
-        productList.add(new Product(6,"print",8000,"co hai cho suc khoe","VN"));
+        productList.add(new Product(6,"prince",8000,"co hai cho suc khoe","VN"));
     }
     public static List<Product> display() {
         return productList;
