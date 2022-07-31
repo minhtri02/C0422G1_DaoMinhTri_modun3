@@ -70,9 +70,9 @@
                     <p>${product.producer}</p>
                 </td>
             </tr>
-            <tr>
-                <td colspan="2"><a href="/Product">Quay về danh sách sản phẩm</a></td>
-            </tr>
+<%--            <tr>--%>
+<%--                <td colspan="2"><a href="/Product">Quay về danh sách sản phẩm</a></td>--%>
+<%--            </tr>--%>
         </table>
     </fieldset>
     <p style="color: red">${error}</p>

@@ -12,7 +12,7 @@
 <head>
     <title>Title</title>
 </head>
-<body >
+<body>
 <h1>Danh sách sản phẩm</h1>
 <a href="/Product?action=add">Thêm sản phẩm</a><br><br>
 
@@ -70,9 +70,9 @@
                     <p>${product.producer}</p>
                 </td>
             </tr>
-            <tr>
-                <td colspan="2"><a href="/Product">Quay về danh sách sản phẩm</a></td>
-            </tr>
+<%--            <tr>--%>
+<%--                <td colspan="2"><a href="/Product">Quay về danh sách sản phẩm</a></td>--%>
+<%--            </tr>--%>
         </table>
     </fieldset>
     <p style="color: red">${error}</p>
