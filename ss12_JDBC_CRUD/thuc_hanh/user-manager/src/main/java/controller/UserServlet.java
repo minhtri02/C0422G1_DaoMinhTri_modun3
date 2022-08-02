@@ -22,6 +22,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -55,6 +57,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -147,18 +151,19 @@ public class UserServlet extends HttpServlet {
     private void showFindByCounTry(HttpServletRequest request, HttpServletResponse response) {
         String country = request.getParameter("country");
         List<User> userList = userDAO.findByCountry(country);
-        if (userList==null){
+//        request.setAttribute("error", 1);
+        if (userList.size()==0){
             request.setAttribute("error", "Không tìm thấy!");
         }else{
             request.setAttribute("listUser", userList);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/list.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/list.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
