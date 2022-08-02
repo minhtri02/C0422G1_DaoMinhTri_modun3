@@ -1,7 +1,7 @@
 package servlet;
 
 import exception.UseException;
-import Service.CalculatorService;
+import service.CalculatorService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
