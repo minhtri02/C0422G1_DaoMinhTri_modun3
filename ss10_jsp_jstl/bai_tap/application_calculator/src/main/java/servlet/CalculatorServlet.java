@@ -14,7 +14,7 @@ public class CalculatorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        
+
     }
 
     @Override
