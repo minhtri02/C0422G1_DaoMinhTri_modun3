@@ -1,15 +1,17 @@
-package service;
+package service.impl;
 
 import model.Product;
-import reponsitory.ProductReponsitory;
+import repository.IProductRepository;
+import repository.ProductRepository;
+import service.IProductService;
 
 import java.util.List;
 
-public class ProductService implements IProductService{
-    static ProductReponsitory productReponsitory = new ProductReponsitory();
+public class ProductService implements IProductService {
+    static IProductRepository productReponsitory = new ProductRepository();
     @Override
     public List<Product> display() {
-        return ProductReponsitory.display();
+        return productReponsitory.display();
     }
 
     @Override
@@ -24,7 +26,7 @@ public class ProductService implements IProductService{
         }
         if (flag){
             Product product = new Product(id,name,price,describe,producer);
-            ProductReponsitory.add(product);
+            productReponsitory.add(product);
         }
     }
 

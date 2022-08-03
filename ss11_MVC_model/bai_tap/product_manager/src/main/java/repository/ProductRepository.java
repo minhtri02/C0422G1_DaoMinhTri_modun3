@@ -1,12 +1,11 @@
-package reponsitory;
+package repository;
 
 import model.Product;
-import service.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductReponsitory {
+public class ProductRepository implements IProductRepository{
     static List<Product> productList = new ArrayList<>();
     static {
         productList.add(new Product(1,"Craven",14000,"co hai cho suc khoe","VN"));
@@ -16,18 +15,19 @@ public class ProductReponsitory {
         productList.add(new Product(5,"sai gon",14000,"co hai cho suc khoe","VN"));
         productList.add(new Product(6,"prince",8000,"co hai cho suc khoe","VN"));
     }
-    public static List<Product> display() {
+
+
+    @Override
+    public List<Product> display() {
         return productList;
     }
 
-
-    public static void add(Product product) {
+    @Override
+    public void add(Product product) {
         productList.add(product);
-
     }
 
-
-    public void edit(int id,Product product) {
+    public void edit(int id, Product product) {
         for (Product p : productList) {
             if (p.getId()==id){
                 p.setName(product.getName());
@@ -45,11 +45,6 @@ public class ProductReponsitory {
                 productList.remove(productList.get(i));
             }
         }
-//        for (Product p: productList) {
-//            if (p.getId()==id){
-//                productList.remove(p);
-//            }
-//        }
     }
 
 
