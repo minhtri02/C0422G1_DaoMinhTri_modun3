@@ -1,11 +1,12 @@
-package repository;
+package repository.Impl;
 
 import model.Product;
+import repository.IProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductRepository implements IProductRepository{
+public class ProductRepository implements IProductRepository {
     static List<Product> productList = new ArrayList<>();
     static {
         productList.add(new Product(1,"Craven",14000,"co hai cho suc khoe","VN"));
