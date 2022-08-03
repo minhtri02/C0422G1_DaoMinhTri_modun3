@@ -2,7 +2,7 @@ package service.impl;
 
 import model.Product;
 import repository.IProductRepository;
-import repository.Impl.ProductRepository;
+import repository.impl.ProductRepository;
 import service.IProductService;
 
 import java.util.List;

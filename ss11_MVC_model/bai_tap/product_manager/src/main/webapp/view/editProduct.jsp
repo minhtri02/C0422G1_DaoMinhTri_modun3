@@ -27,23 +27,23 @@
         <table>
             <tr>
                 <td><label>Mã sản phẩm:</label></td>
-                <td><input type="text" value="${id}" name="id"></td>
+                <td><input disabled type="text" value="${id}" name="id"></td>
             </tr>
             <tr>
                 <td><label>Tên sản phẩm: </label></td>
-                <td><input type="text" name="name"></td>
+                <td><input type="text" name="name" value="${product.name}"></td>
             </tr>
             <tr>
                 <td><label>Giá sản phẩm: </label></td>
-                <td><input type="number" name="price"></td>
+                <td><input type="number" name="price" value="${product.price}"></td>
             </tr>
             <tr>
                 <td><label>Mô tả sản phẩm: </label></td>
-                <td><input type="text" name="describe"></td>
+                <td><input type="text" name="describe" value="${product.describe}"></td>
             </tr>
             <tr>
                 <td><label>Nơi sản xuất: </label></td>
-                <td><input type="text" name="producer"></td>
+                <td><input type="text" name="producer" value="${product.producer}"></td>
             </tr>
             <tr>
                 <td><input type="submit"></td>

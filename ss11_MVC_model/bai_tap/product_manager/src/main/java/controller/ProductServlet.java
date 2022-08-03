@@ -28,7 +28,8 @@ public class ProductServlet extends HttpServlet {
                 showEditProduct(request,response);
                 break;
             case "delete":
-                showDeleteProduct(request,response);
+//                showDeleteProduct(request,response);
+                deleteProduct2(request,response);
                 break;
             case "findOfId":
                 showProductById(request,response);
@@ -39,6 +40,50 @@ public class ProductServlet extends HttpServlet {
             default:
                 listProduct(request,response);
         }
+    }
+
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action =request.getParameter("action");
+        if (action == null){
+            action="";
+        }
+
+        switch (action){
+            case "add":
+                createProduct(request,response);
+                break;
+            case "edit":
+                editProduct(request,response);
+                break;
+//            case "delete":
+//                deleteProduct(request,response);
+//                break;
+            case "findOfName":
+                findOfNameProduct(request,response);
+                break;
+            default:
+                listProduct(request,response);
+        }
+    }
+
+    private void deleteProduct2(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        productService.delete(id);
+        List<Product> productList = productService.display();
+        request.setAttribute("productList",productList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/list_product.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void showFindOfName(HttpServletRequest request, HttpServletResponse response) {
@@ -66,26 +111,28 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    private void showDeleteProduct(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/deleteProduct.jsp");
-        int id= Integer.parseInt(request.getParameter("id"));
-        request.setAttribute("id",id);
-        Product product = productService.findOfId(id);
-        request.setAttribute("product",product);
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    private void showDeleteProduct(HttpServletRequest request, HttpServletResponse response) {
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/deleteProduct.jsp");
+//        int id= Integer.parseInt(request.getParameter("id"));
+//        request.setAttribute("id",id);
+//        Product product = productService.findOfId(id);
+//        request.setAttribute("product",product);
+//        try {
+//            requestDispatcher.forward(request,response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     private void showEditProduct(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/editProduct.jsp");
         int id= Integer.parseInt(request.getParameter("id"));
+        Product product = productService.findOfId(id);
         request.setAttribute("id",id);
+        request.setAttribute("product",product);
         try {
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {
@@ -123,31 +170,8 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String action =request.getParameter("action");
-        if (action == null){
-            action="";
-        }
 
-        switch (action){
-            case "add":
-                createProduct(request,response);
-                break;
-            case "edit":
-                editProduct(request,response);
-                break;
-            case "delete":
-                deleteProduct(request,response);
-                break;
-            case "findOfName":
-                findOfNameProduct(request,response);
-                break;
-            default:
-                listProduct(request,response);
-        }
-    }
+
 
     private void findOfNameProduct(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
@@ -171,35 +195,35 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
-        String flag = request.getParameter("deleteResutl");
-        int id =0;
-        try{
-             id = Integer.parseInt(request.getParameter("id"));
-            Product product = productService.findOfId(id);
-            request.setAttribute("product",product);
-        }catch (Exception e){
-            listProduct(request,response);
-        }
-        if (flag.equals("yes")){
-            productService.delete(id);
-            listProduct(request,response);
-        }else if (flag.equals("no")){
-            listProduct(request,response);
-        }else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/deleteProduct.jsp");
-            request.setAttribute("id",id);
-            request.setAttribute("resutl","Bạn phải nhập yes or no");
-            try {
-                requestDispatcher.forward(request,response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
+//    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
+//        String flag = request.getParameter("deleteResutl");
+//        int id =0;
+//        try{
+//             id = Integer.parseInt(request.getParameter("id"));
+//            Product product = productService.findOfId(id);
+//            request.setAttribute("product",product);
+//        }catch (Exception e){
+//            listProduct(request,response);
+//        }
+//        if (flag.equals("yes")){
+//            productService.delete(id);
+//            listProduct(request,response);
+//        }else if (flag.equals("no")){
+//            listProduct(request,response);
+//        }else {
+//            RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/deleteProduct.jsp");
+//            request.setAttribute("id",id);
+//            request.setAttribute("resutl","Bạn phải nhập yes or no");
+//            try {
+//                requestDispatcher.forward(request,response);
+//            } catch (ServletException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//    }
 
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
