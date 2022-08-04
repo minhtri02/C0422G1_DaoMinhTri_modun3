@@ -29,7 +29,7 @@
 
 
 <div align="center" class="container">
-    <button type="button" onclick="location.href='/users?action=soft'">SORT</button>
+    <button type="button" onclick="location.href='/users?action=sort'">SORT</button>
 <%--<c:if test="${error!=1}"><p>${error}</p></c:if>--%>
 
     <p style="color: red"> ${error}</p>
