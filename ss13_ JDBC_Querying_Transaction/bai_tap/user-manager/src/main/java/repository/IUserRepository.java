@@ -18,7 +18,7 @@ public interface IUserRepository {
 
     List<User> findByCountry(String country);
 
-    List<User> softByName();
+    List<User> sortByName();
 
     User getUserById(int id);
 

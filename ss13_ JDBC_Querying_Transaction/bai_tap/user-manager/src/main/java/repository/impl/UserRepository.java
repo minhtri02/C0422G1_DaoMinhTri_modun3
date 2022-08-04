@@ -18,7 +18,7 @@ public class UserRepository implements IUserRepository {
     private static final String DELETE_USERS_SQL = "call delete_user(?);";
     private static final String UPDATE_USERS_SQL = "call edit_user(?,?,?,?);";
     private static final String FIND_BY_COUNTRY_SQL = "select * from users where country like ?;";
-    private static final String SOFT_BY_NAME = "select * from users order by name;";
+    private static final String SORT_BY_NAME = "select * from users order by name;";
 
     public void UserDAO() {
     }
@@ -151,10 +151,10 @@ public class UserRepository implements IUserRepository {
 
 
     @Override
-    public List<User> softByName() {
+    public List<User> sortByName() {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SOFT_BY_NAME);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SORT_BY_NAME);) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

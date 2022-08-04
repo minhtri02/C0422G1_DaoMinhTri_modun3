@@ -43,7 +43,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> sortByName() {
-        return userDAO.softByName();
+        return userDAO.sortByName();
     }
 
     @Override
