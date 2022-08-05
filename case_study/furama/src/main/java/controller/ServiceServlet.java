@@ -5,8 +5,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "FuramaServlet", urlPatterns ={"/Furama",""} )
-public class FuramaServlet extends HttpServlet {
+@WebServlet(name = "FuramaServlet", urlPatterns ={"/service",""} )
+public class ServiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -15,14 +15,16 @@ public class FuramaServlet extends HttpServlet {
         if (action == null) {
             action = "";
         }
-
-
             switch (action) {
-                case "addService":
+
+                case "showAddService":
                     showAddService(request,response);
                     break;
-                case "list":
+                case "showListService":
                     showListService(request,response);
+                    break;
+                case "showEditService":
+                    showEditService(request,response);
                     break;
                 case "add":
                     break;
@@ -33,8 +35,23 @@ public class FuramaServlet extends HttpServlet {
 
     }
 
+
+
+    private void showEditService(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/editService.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     private void showAddService(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/addService.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/addService.jsp");
         try {
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {
@@ -45,7 +62,7 @@ public class FuramaServlet extends HttpServlet {
     }
 
     private void showListService(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/listService.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/listService.jsp");
         try {
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {
