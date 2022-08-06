@@ -21,7 +21,7 @@
         <nav class="col-lg-2"></nav>
         <nav class="col-lg-8 d-flex justify-content-center">
 
-            <form class="justify-content-center d-flex" action=""
+            <form class="justify-content-center d-flex" action="/customer?action=AddCustomer" method="post"
                   style="border: 1px solid #A9A9A9; border-radius: 20px; width: 100%">
                 <fieldset>
                     <legend>Add Customer</legend>
@@ -29,35 +29,43 @@
 
                         <tr>
                             <th scope="col">
-                                <label>Tên khách hàng</label>
+                                <label>Mã loại khách</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="idFacility">
                             </th>
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label>Ngày sinh</label>
+                                <label>Tên khách hàng</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="name">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col">
+                                <label>Ngày sinh(yyyy/mm/dd)</label>
+                            </th>
+                            <th scope="col">
+                                <input type="text" name="dayOfBirt">
                             </th>
 
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label>Giới tính</label>
+                                <label>Giới tính(0 or 1)</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="gender">
                             </th>
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label>Số CMND</label>
+                                <label>Số CMND(9 number)</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="idCard">
                             </th>
                         </tr>
                         <div>
@@ -68,7 +76,7 @@
                                 <label>Số điện thoại</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="phone">
                             </th>
                         </tr>
                         <tr >
@@ -76,15 +84,7 @@
                                 <label>Email</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
-                            </th>
-                        </tr>
-                        <tr >
-                            <th scope="col">
-                                <label>Loại khách</label>
-                            </th>
-                            <th scope="col">
-                                <input type="text">
+                                <input type="text" name="email">
                             </th>
                         </tr>
                         <tr >
@@ -92,10 +92,12 @@
                                 <label>Địa chỉ</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="address">
                             </th>
                         </tr>
-
+                        <tr>
+                            <td colspan="2">${error}</td>
+                        </tr>
                         <tr>
                             <th></th>
                             <th><input class="btn btn-primary" type="submit" value="SAVE"></th>

@@ -15,6 +15,7 @@
             background-position: bottom right;
             background-attachment: fixed;
             background-repeat: no-repeat;
+            background-size: 100%;
         }
     </style>
 </head>
@@ -37,8 +38,14 @@
                 <a class="navbar-brand text-light" href="/service">Home</a>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active text-light" aria-current="page" href="#">Employee</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Employee
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <li><a class="dropdown-item" href="/employee?action=showListEmployee">List employee</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#"
@@ -66,9 +73,8 @@
                                 ConTract
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="/contract?action=showListContract">List Contract</a></li>
+                                <li><a class="dropdown-item" href="/contract?action=showAddContract">Add ConTract</a></li>
                             </ul>
                         </li>
                     </ul>
