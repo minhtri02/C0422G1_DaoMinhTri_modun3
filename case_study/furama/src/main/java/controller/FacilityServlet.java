@@ -51,7 +51,9 @@ public class FacilityServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
+            case "deleteFacility":
+                deleteFacility(request,response);
+                break;
             case "addService":
                 addService(request, response);
                 break;
@@ -61,6 +63,13 @@ public class FacilityServlet extends HttpServlet {
                 listService(request,response);
                 break;
         }
+    }
+
+    private void deleteFacility(HttpServletRequest request, HttpServletResponse response) {
+        int facilityID = Integer.parseInt(request.getParameter("idFacility"));
+        facilityService.deleteFacilityID(facilityID);
+        request.setAttribute("error","xoá thành công!");
+        showListService(request,response);
     }
 
 
@@ -121,7 +130,18 @@ public class FacilityServlet extends HttpServlet {
 
     private void editFacility(HttpServletRequest request, HttpServletResponse response) {
         int idFacility = Integer.parseInt(request.getParameter("idFacility"));
-        Service service = facilityService.findByID(idFacility);
+        String nameFacility = request.getParameter("nameFacility");
+        int renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
+        Integer area = Integer.parseInt(request.getParameter("area"));
+        Double cost = Double.parseDouble(request.getParameter("cost"));
+        Integer maxPeoble = Integer.parseInt(request.getParameter("maxPeoble"));
+        String standardRoom = request.getParameter("standardRoom");
+        String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+        Double poolArea = Double.parseDouble(request.getParameter("poolArea"));
+        Integer numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+        String facilityFree = request.getParameter("facilityFree");
+        Integer facilityTypeId = Integer.valueOf(request.getParameter("facilityTypeId"));
+        Service service = new Service(idFacility,nameFacility,area,cost,maxPeoble,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors,facilityFree,renTypeId,facilityTypeId);
         facilityService.editFacility(service);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/editService.jsp");
         request.setAttribute("error","thành công");
@@ -148,6 +168,40 @@ public class FacilityServlet extends HttpServlet {
     }
 
     private void addService(HttpServletRequest request, HttpServletResponse response) {
+        String nameFacility = request.getParameter("nameService");
+        Integer area = Integer.parseInt(request.getParameter("area"));
+        Double cost = Double.parseDouble(request.getParameter("cost"));
+        Integer maxPeoble = Integer.parseInt(request.getParameter("maxPeoble"));
+        String standardRoom = request.getParameter("standardRoom");
+        String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+        Double poolArea=null;
+        Integer numberOfFloors=null;
+        String facilityFree = null;
+        Service service = null;
+        Integer renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
+        Integer facilityTypeId = Integer.valueOf(request.getParameter("serviceTypeId"));
+        if (nameFacility.contains("villa")){
+             poolArea = Double.parseDouble(request.getParameter("poolArea"));
+             numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+             service = new Service(nameFacility,area,cost,maxPeoble,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors,facilityFree,renTypeId,facilityTypeId);
 
+        }else if (nameFacility.contains("house")){
+            numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+             service = new Service(nameFacility,area,cost,maxPeoble,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors,facilityFree,renTypeId,facilityTypeId);
+
+        }else if (nameFacility.contains("room")){
+            facilityFree = request.getParameter("facilityFree");
+             service = new Service(nameFacility,area,cost,maxPeoble,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors,facilityFree,renTypeId,facilityTypeId);
+        }
+        facilityService.addFacility(service);
+        request.setAttribute("error","thành công!");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/addService.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -20,28 +20,31 @@
         <nav class="col-lg-2"></nav>
         <nav class="col-lg-8 d-flex justify-content-center">
 
-            <form class="justify-content-center d-flex" action="" style="border: 1px solid #A9A9A9; border-radius: 20px; width: 80%">
+            <form class="justify-content-center d-flex" action="/facility?action=addService" method="post" style="border: 1px solid #A9A9A9; border-radius: 20px; width: 80%">
                 <fieldset>
                     <legend>Add Service</legend>
                     <table style="width: 100%" class="table">
                         <tr>
+                            <th scope="col">
+                                <label >Tên dịch vụ</label>
+                            </th >
                             <th scope="col" colspan="2">
-                                <select onchange=changeService(this.value) name="serviceType">
+                                <select onchange=changeService(this.value) name="nameService">
                                     <option value="none">chọn loại dịch vụ</option>
                                     <option value="villa">Villa</option>
-                                    <option value="home">Home</option>
+                                    <option value="house">Home</option>
                                     <option value="room">Room</option>
                                 </select>
                             </th>
                         </tr>
-                        <tr>
-                            <th scope="col">
-                                <label >Tên dịch vụ</label>
-                            </th >
-                            <th scope="col">
-                                <input type="text" name="nameService">
-                            </th>
-                        </tr>
+<%--                        <tr>--%>
+<%--                            <th scope="col">--%>
+<%--                                <label >Tên dịch vụ</label>--%>
+<%--                            </th >--%>
+<%--                            <th scope="col">--%>
+<%--                                <input type="text" name="nameService">--%>
+<%--                            </th>--%>
+<%--                        </tr>--%>
                         <tr>
                             <th scope="col">
                                 <label >Diện tích sử dụng</label>
@@ -64,7 +67,7 @@
                                 <label>Số người tối đa</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="maxPeople">
+                                <input type="text" name="maxPeoble">
                             </th>
                         </tr>
                         <div>
@@ -115,7 +118,7 @@
                                 <label >Mã kiểu thuê</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="rentTypeId">
+                                <input type="text" name="renTypeId">
                             </th>
                         </tr>
                         <tr id="s7" >
@@ -127,7 +130,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <th></th>
+                            <th><span style="color: red">${error}</span></th>
                             <th><input class="btn btn-primary" type="submit" value="SAVE"></th>
                         </tr>
                     </table>
@@ -158,7 +161,7 @@
                 document.getElementById("s4").style.display="table-row";
                 document.getElementById("s5").style.display="none";
                 break;
-            case "home":
+            case "house":
                 document.getElementById("s1").style.display="table-row";
                 document.getElementById("s2").style.display="table-row";
                 document.getElementById("s3").style.display="none";

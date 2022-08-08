@@ -11,4 +11,5 @@ public interface IFacilityRepository {
     Service findByID(int id);
     List<RentType> listRentType();
     void editFacility(Service service);
+    void deleteFacility(int facilityID);
 }

@@ -32,7 +32,7 @@
                                 <label>Mã loại khách</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="idFacility">
+                                <input type="text" name="idFacility" value="${customer.idCustomer}">
                             </th>
                         </tr>
                         <tr>
@@ -40,7 +40,8 @@
                                 <label>Tên khách hàng</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="name">
+                                <input type="text" name="name" value="${customer.name}">
+                                <p style="color: red">${name}</p>
                             </th>
                         </tr>
                         <tr>
@@ -48,7 +49,7 @@
                                 <label>Ngày sinh(yyyy/mm/dd)</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="dayOfBirt">
+                                <input type="text" name="dayOfBirt" value="${customer.dayOfBirt}">
                             </th>
 
                         </tr>
@@ -57,7 +58,7 @@
                                 <label>Giới tính(0 or 1)</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="gender">
+                                <input type="text" name="gender"  value="${customer.gender}">
                             </th>
                         </tr>
                         <tr>
@@ -65,7 +66,8 @@
                                 <label>Số CMND(9 number)</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="idCard">
+                                <input type="text" name="idCard"  value="${customer.idCard}">
+                                <p style="color: red">${idCard}</p>
                             </th>
                         </tr>
                         <div>
@@ -76,7 +78,8 @@
                                 <label>Số điện thoại</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="phone">
+                                <input type="text" name="phone"  value="${customer.phone}">
+                                <p style="color: red">${phone}</p>
                             </th>
                         </tr>
                         <tr >
@@ -84,7 +87,8 @@
                                 <label>Email</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="email">
+                                <input type="text" name="email"  value="${customer.email}">
+                                <p style="color: red">${email}</p>
                             </th>
                         </tr>
                         <tr >
@@ -92,7 +96,7 @@
                                 <label>Địa chỉ</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="address">
+                                <input type="text" name="address"  value="${customer.address}">
                             </th>
                         </tr>
                         <tr>

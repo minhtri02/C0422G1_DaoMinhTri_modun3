@@ -28,8 +28,12 @@
                         <th><input readonly name="idFacility" type="text" value="${facility.idFacility}"></th>
                     </tr>
                     <tr>
+                        <th><label>Tên dịch vụ</label></th>
+                        <th><input readonly name="nameFacility" type="text" value="${facility.nameFacility}"></th>
+                    </tr>
+                    <tr>
                         <th scope="col">
-                            <label >Tên dịch vụ</label>
+                            <label >loại dịch vụ</label>
                         </th >
                         <th scope="col" colspan="2">
                             <select onchange=changeService(this.value) name="renTypeId">
@@ -40,7 +44,6 @@
                                         </c:when>
                                         <c:otherwise>
                                             <option value="${rentType.renTypeId}">${rentType.nameRenType}</option>
-
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
@@ -114,6 +117,14 @@
                         </th>
                         <th scope="col">
                             <input type="text" name="facilityFree" value="${facility.facilityFree}">
+                        </th>
+                    </tr>
+                    <tr  >
+                        <th scope="col">
+                            <label >Loại dịch vụ</label>
+                        </th>
+                        <th scope="col">
+                            <input type="text" name="facilityTypeId" value="${facility.facilityTypeId}">
                         </th>
                     </tr>
                     <tr>

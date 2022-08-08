@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
@@ -156,9 +157,24 @@ public class CustomerServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         Customer customer = new Customer(Integer.parseInt(idFacility),name,dayOfbirt,Integer.parseInt(gender),idCard,phone,email,address);
-        customerService.addCustomer(customer);
-        request.setAttribute("error","Thêm mới thành công!");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+        Map<String, String> mapErrors = customerService.validate(customer);
+        RequestDispatcher requestDispatcher;
+        String message="";
+        if(mapErrors.size()>0){
+            for (Map.Entry<String, String> entry: mapErrors.entrySet()) {
+                request.setAttribute(entry.getKey(), entry.getValue());
+            }
+            request.setAttribute("customer",customer);
+//            request.setAttribute("guestTypeList",guestTypeList);
+            requestDispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+        }else {
+            customerService.addCustomer(customer);
+            message="Tạo mới thành công";
+            List<Customer> customerList = customerService.displayCustomer();
+            requestDispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+            request.setAttribute("error",message);
+            request.setAttribute("customerList",customerList);
+        }
         try {
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {

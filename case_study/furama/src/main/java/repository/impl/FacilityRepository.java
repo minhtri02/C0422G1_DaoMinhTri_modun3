@@ -18,23 +18,24 @@ public class FacilityRepository implements IFacilityRepository {
     private final String SELECT_ALL_SERVICE = "SELECT * FROM furama.dich_vu;";
     private final String SELECT_BY_ID_SERVICE = "select * from furama.dich_vu where ma_dich_vu = ?;";
     private final String SELECT_SERVICE_TYPE = "SELECT * FROM furama.loai_dich_vu;";
-    private final String EDIT_SERVICE = "update furama.dich_vu set ten_dich_vu =?,dien_tich=?,chi_phi_thue=?,so_nguoi_toi_da = ?,tieu_chuan_phong =?,mo_ta_tien_nghi_khac = ?,dien_tich_ho_boi=?,so_tang =?,dich_vu_mien_phi_di_kem=?,ma_kieu_thue=?,ma_loai_dịch_vu=? where ma_dich_vu =?;";
+    private final String EDIT_SERVICE = "update furama.dich_vu set ten_dich_vu =?,dien_tich=?,chi_phi_thue=?,so_nguoi_toi_da = ?,tieu_chuan_phong =?,mo_ta_tien_nghi_khac = ?,dien_tich_ho_boi=?,so_tang =?,dich_vu_mien_phi_di_kem=?,ma_kieu_thue=?,ma_loai_dich_vu=? where ma_dich_vu =?;";
+    private final String DELETE_SERVICE ="delete from furama.dich_vu where ma_dich_vu =?;";
 
     @Override
     public void addFacility(Service service) {
         try (Connection connection = conn.getConnetion();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_SERVICE)) {
-//            preparedStatement.setString(1, service.getNameService());
-//            preparedStatement.setInt(2, service.getArea());
-//            preparedStatement.setDouble(3, service.getCost());
-//            preparedStatement.setInt(4, service.getMaxPeoble());
-//            preparedStatement.setString(5, service.getStandardRoom());
-//            preparedStatement.setString(6, service.getDescriptionOtherConvenience());
-//            preparedStatement.setDouble(7, service.getPoolArea());
-//            preparedStatement.setInt(8, service.getNumberOfFloors());
-//            preparedStatement.setString(9, service.getFacilityFree());
-//            preparedStatement.setInt(10, service.getRentTypeId());
-//            preparedStatement.setInt(11, service.getServiceTypeId());
+            preparedStatement.setString(1, service.getNameFacility());
+            preparedStatement.setInt(2, service.getArea());
+            preparedStatement.setDouble(3, service.getCost());
+            preparedStatement.setInt(4, service.getMaxPeoble());
+            preparedStatement.setString(5, service.getStandardRoom());
+            preparedStatement.setString(6, service.getDescriptionOtherConvenience());
+            preparedStatement.setDouble(7, service.getPoolArea());
+            preparedStatement.setInt(8, service.getNumberOfFloors());
+            preparedStatement.setString(9, service.getFacilityFree());
+            preparedStatement.setInt(10, service.getRentTypeId());
+            preparedStatement.setInt(11, service.getFacilityTypeId());
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -171,6 +172,17 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setInt(10,service.getRentTypeId());
             preparedStatement.setInt(11,service.getFacilityTypeId());
             preparedStatement.setInt(12,service.getIdFacility());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteFacility(int facilityID) {
+        try (Connection connection = conn.getConnetion();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SERVICE)) {
+            preparedStatement.setInt(1,facilityID);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
