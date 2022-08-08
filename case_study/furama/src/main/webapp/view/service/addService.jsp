@@ -26,7 +26,7 @@
                     <table style="width: 100%" class="table">
                         <tr>
                             <th scope="col" colspan="2">
-                                <select onchange=changeService(this.value) >
+                                <select onchange=changeService(this.value) name="serviceType">
                                     <option value="none">chọn loại dịch vụ</option>
                                     <option value="villa">Villa</option>
                                     <option value="home">Home</option>
@@ -39,7 +39,7 @@
                                 <label >Tên dịch vụ</label>
                             </th >
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="nameService">
                             </th>
                         </tr>
                         <tr>
@@ -47,7 +47,7 @@
                                 <label >Diện tích sử dụng</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="area">
                             </th>
 
                         </tr>
@@ -56,7 +56,7 @@
                                 <label >Chi phí thuê</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="cost">
                             </th>
                         </tr>
                         <tr>
@@ -64,7 +64,7 @@
                                 <label>Số người tối đa</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="maxPeople">
                             </th>
                         </tr>
                         <div>
@@ -75,7 +75,7 @@
                                 <label>Tiêu chuẩn phòng</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="standardRoom">
                             </th>
                         </tr>
                         <tr id="s2" style="display: none">
@@ -83,7 +83,7 @@
                                 <label >Mô tả tiện nghi khác</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="descreptionOtherConvenience">
                             </th>
                         </tr>
                         <tr id="s3" style="display: none">
@@ -91,7 +91,7 @@
                                 <label >Diện tích hồ bơi</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="poolArea">
                             </th>
                         </tr>
                         <tr id="s4" style="display: none">
@@ -99,7 +99,7 @@
                                 <label>Số tầng</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="numberOfFloors">
                             </th>
                         </tr>
                         <tr id="s5" style="display: none">
@@ -107,7 +107,23 @@
                                 <label >Dịch vụ đi kèm</label>
                             </th>
                             <th scope="col">
-                                <input type="text">
+                                <input type="text" name="facilityFree">
+                            </th>
+                        </tr>
+                        <tr id="s6" >
+                            <th scope="col">
+                                <label >Mã kiểu thuê</label>
+                            </th>
+                            <th scope="col">
+                                <input type="text" name="rentTypeId">
+                            </th>
+                        </tr>
+                        <tr id="s7" >
+                            <th scope="col">
+                                <label >Loại dịch vụ</label>
+                            </th>
+                            <th scope="col">
+                                <input type="text" name="serviceTypeId">
                             </th>
                         </tr>
                         <tr>
@@ -150,8 +166,8 @@
                 document.getElementById("s5").style.display="none";
                 break;
             case "room":
-                document.getElementById("s1").style.display="none";
-                document.getElementById("s2").style.display="none";
+                document.getElementById("s1").style.display="table-row";
+                document.getElementById("s2").style.display="table-row";
                 document.getElementById("s3").style.display="none";
                 document.getElementById("s4").style.display="none";
                 document.getElementById("s5").style.display="table-row";

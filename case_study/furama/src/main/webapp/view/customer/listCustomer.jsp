@@ -14,14 +14,21 @@
 </head>
 <body >
 <%@include file="../include/header.jsp" %>
-<nav class="row">
+<nav class="row container-fluid">
     <nav class="row" id="thanh_body">
-        <nav class="col-lg-12 d-flex justify-content-center">
-            <form class="justify-content-center d-flex" action=""
+        <nav class="col-lg-12 d-flex justify-content-center pt-4">
+            <form class="justify-content-center d-flex " action=""
                   style="border: 1px solid #A9A9A9; border-radius: 20px; width: 100%">
+
                 <fieldset>
                     <legend>List Customer</legend>
-                    <p>${error}</p>
+<%--                    <nav class="col-lg-3 d-flex justify-content-center">--%>
+<%--                        <form class="d-flex justify-content-center mt-2 mb-2">--%>
+<%--                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">--%>
+<%--                            <button class="btn btn-success" type="button">Search</button>--%>
+<%--                        </form>--%>
+<%--                    </nav>--%>
+                    <p style="color: red">${error}</p>
                     <table class="table" style="width: 100%">
                         <thead>
                         <tr>
@@ -43,12 +50,24 @@
                                 <td>${customer.idCustomer}</td>
                                 <td>${customer.name}</td>
                                 <td>${customer.dayOfBirt}</td>
-                                <td>${customer.gender}</td>
+                                <td>
+                                        <c:if test="${customer.gender==1}">
+                                            <span value="1">Nam</span>
+                                        </c:if>
+                                        <c:if test="${customer.gender==0}">
+                                            <span value="0">Nữ</span>
+                                        </c:if>
+                                </td>
                                 <td>${customer.idCard}</td>
                                 <td>${customer.phone}</td>
                                 <td>${customer.email}</td>
                                 <td>${customer.address}</td>
-                                <td>${customer.idFacility}</td>
+                                <td><c:forEach var="CustomerTypeList" items="${listCustomerType}">
+                                    <c:if test="${customer.idFacility==CustomerTypeList.customerTypeId}">
+                                        ${CustomerTypeList.nameCustomerType}
+                                    </c:if>
+                                </c:forEach>
+                                </td>
                                 <td>
                                     <button class="btn " type="button" onclick="location.href='/customer?action=showEditCustomer&idCustomer=${customer.idCustomer}'">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -35,7 +35,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" href="/service">Home</a>
+                <a class="navbar-brand text-light" href="/facility">Home</a>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
@@ -63,8 +63,8 @@
                                 Service
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                <li><a class="dropdown-item" href="/service?action=showListService">List Service</a></li>
-                                <li><a class="dropdown-item" href="/service?action=showAddService">Add Service</a></li>
+                                <li><a class="dropdown-item" href="/facility?action=showListService">List Service</a></li>
+                                <li><a class="dropdown-item" href="/facility?action=showAddService">Add Service</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

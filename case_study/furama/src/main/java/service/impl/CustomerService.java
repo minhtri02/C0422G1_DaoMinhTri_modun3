@@ -1,6 +1,7 @@
 package service.impl;
 
-import model.Customer;
+import model.customer.Customer;
+import model.customer.CustomerType;
 import repository.ICustomerRepository;
 import repository.impl.CustomerRepository;
 import service.ICustomerService;
@@ -8,6 +9,7 @@ import service.ICustomerService;
 import java.util.List;
 
 public class CustomerService implements ICustomerService {
+
     static ICustomerRepository customerRepository = new CustomerRepository();
     @Override
     public void addCustomer(Customer customer) {
@@ -32,6 +34,11 @@ public class CustomerService implements ICustomerService {
     @Override
     public void editCustomer(int idCustomer, int idFacility, String name, String dayOfBirt, int gender, String idCard, String phone, String email, String address) {
         customerRepository.editCustomer(idCustomer,idFacility,name,dayOfBirt,gender,idCard,phone,email,address);
+    }
+
+    @Override
+    public List<CustomerType> displayCustomerType() {
+        return customerRepository.displayCustomerType();
     }
 
 }

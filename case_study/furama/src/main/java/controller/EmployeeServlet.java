@@ -24,9 +24,7 @@ public class EmployeeServlet extends HttpServlet {
 //                break;
 //            case "showEditCustomer":
 //                showEditCustomer(request,response);
-            default:
-                showHome(request, response);
-                break;
+
         }
     }
 

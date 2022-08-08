@@ -1,6 +1,7 @@
 package controller;
 
-import model.Customer;
+import model.customer.Customer;
+import model.customer.CustomerType;
 import service.ICustomerService;
 import service.impl.CustomerService;
 
@@ -33,60 +34,8 @@ public class CustomerServlet extends HttpServlet {
             case "showFindByIdCustomer":
                 showFindByIdCustomer(request,response);
                 break;
-        }
-    }
-
-    private void showFindByIdCustomer(HttpServletRequest request, HttpServletResponse response) {
-        int idCustomer= Integer.parseInt(request.getParameter("idCustomer"));
-        Customer customer = customerService.findByIdCustomer(idCustomer);
-        request.setAttribute("customer",customer);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/");
-    }
-
-    private void showEditCustomer(HttpServletRequest request, HttpServletResponse response) {
-        int idCustomer= Integer.parseInt(request.getParameter("idCustomer"));
-        Customer customer = customerService.findByIdCustomer(idCustomer);
-        request.setAttribute("customer",customer);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/editCustomer.jsp");
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void showAddCustomer(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void showListCustomer(HttpServletRequest request, HttpServletResponse response) {
-        List<Customer> list = customerService.displayCustomer();
-        request.setAttribute("listCustomer",list);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/listCustomer.jsp");
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void showHome(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/listCustomer.jsp");
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            default:
+                showListCustomer(request,response);
         }
     }
 
@@ -114,9 +63,69 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+    private void showFindByIdCustomer(HttpServletRequest request, HttpServletResponse response) {
+        int idCustomer= Integer.parseInt(request.getParameter("idCustomer"));
+        Customer customer = customerService.findByIdCustomer(idCustomer);
+        request.setAttribute("customer",customer);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/");
+    }
+
+    private void showEditCustomer(HttpServletRequest request, HttpServletResponse response) {
+        int idCustomer= Integer.parseInt(request.getParameter("idCustomer"));
+        Customer customer = customerService.findByIdCustomer(idCustomer);
+        List<CustomerType> customerTypes = customerService.displayCustomerType();
+        request.setAttribute("listCustomerType",customerTypes);
+        request.setAttribute("customer",customer);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/editCustomer.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAddCustomer(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void showListCustomer(HttpServletRequest request, HttpServletResponse response) {
+        List<Customer> list = customerService.displayCustomer();
+        List<CustomerType> customerTypes = customerService.displayCustomerType();
+        request.setAttribute("listCustomerType",customerTypes);
+        request.setAttribute("listCustomer",list);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/listCustomer.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void showHome(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/listCustomer.jsp");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) {
         int idFacility = Integer.parseInt(request.getParameter("idFacility"));
-        int idCustomer = Integer.parseInt(request.getParameter("idCustomer"));
         String name = request.getParameter("name");
         String dayOfbirt = request.getParameter("dayOfBirt");
         int gender = Integer.parseInt(request.getParameter("gender"));
@@ -124,7 +133,8 @@ public class CustomerServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        customerService.editCustomer(idCustomer,idFacility,name,dayOfbirt,gender,idCard,phone,email,address);
+        String idCustomer = request.getParameter("idCustomer");
+        customerService.editCustomer(Integer.parseInt(idCustomer),idFacility,name,dayOfbirt,gender,idCard,phone,email,address);
         request.setAttribute("error","sửa thành công!");
         showEditCustomer(request,response);
     }

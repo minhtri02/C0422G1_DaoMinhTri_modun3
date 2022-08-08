@@ -1,6 +1,7 @@
 package repository.impl;
 
-import model.Customer;
+import model.customer.Customer;
+import model.customer.CustomerType;
 import repository.ICustomerRepository;
 import repository.connetion.Conn;
 
@@ -15,6 +16,7 @@ public class CustomerRepository implements ICustomerRepository {
     private String DELETE_CUSTOMER = "delete from khach_hang where ma_khach_hang = ?;";
     private String FIND_BY_ID_CUSTOMER ="select * from khach_hang where ma_khach_hang =?;";
     private String EDIT_CUSTOMER=" update khach_hang set ma_loai_khach =? ,ho_ten=?,ngay_sinh = ? , gioi_tinh =?,so_cmnd =?,so_dien_thoai =?,email=?,dia_chi=? where ma_khach_hang =?;";
+    private String SELECT_CUSTOMER_TYPE = "SELECT * FROM furama.loai_khach;";
 
     @Override
     public void addCustomer(Customer customer) {
@@ -111,5 +113,22 @@ public class CustomerRepository implements ICustomerRepository {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public List<CustomerType> displayCustomerType() {
+        List<CustomerType> typeList = new ArrayList<>();
+        try (Connection connection = connetion.getConnetion();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CUSTOMER_TYPE)) {
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int customerTypeId = Integer.parseInt(resultSet.getString(1));
+                String nameTypeCustomer = resultSet.getString(2);
+                typeList.add(new CustomerType(customerTypeId,nameTypeCustomer));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return typeList;
     }
 }

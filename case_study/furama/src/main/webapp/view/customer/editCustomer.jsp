@@ -19,7 +19,7 @@
     <nav class="col-lg-2"></nav>
     <nav class="col-lg-8 d-flex justify-content-center">
 
-        <form class="justify-content-center d-flex" action="/customer?action=editCustomer" method="post"
+        <form class="justify-content-center " action="/customer?action=editCustomer" method="post"
               style="border: 1px solid #A9A9A9; border-radius: 20px; width: 80%">
             <fieldset>
                 <legend>Edit Customer</legend>
@@ -27,18 +27,29 @@
                 <table style="width: 100%" class="table">
                     <tr>
                         <th scope="col">
-                            <label >Mã khách hàng</label>
+                            <label>Mã khách hàng</label>
                         </th>
                         <th scope="col">
-                            <input  name="idCustomer" type="text" value="${customer.idCustomer}">
+                            <input readonly class="form-control" name="idCustomer" type="text" value="${customer.idCustomer}">
                         </th>
                     </tr>
                     <tr>
                         <th scope="col">
-                            <label >Mã loại khách</label>
+                            <label>Mã loại khách</label>
                         </th>
-                        <th scope="col">
-                            <input  name="idFacility" type="text" value="${customer.idFacility}">
+                        <th scope="col" >
+                            <select name="idFacility" class="form-control">
+                                <c:forEach items="${listCustomerType}" var="customerType">
+                                    <c:choose>
+                                        <c:when test="${customerType.customerTypeId==customer.idFacility}">
+                                            <option value="${customerType.customerTypeId}" selected>${customerType.nameCustomerType}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${customerType.customerTypeId}">${customerType.nameCustomerType}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
                         </th>
                     </tr>
                     <tr>
@@ -46,7 +57,7 @@
                             <label>Tên Khách hàng</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="name"  value="${customer.name}">
+                            <input class="form-control" type="text" name="name" value="${customer.name}">
                         </th>
                     </tr>
                     <tr>
@@ -54,7 +65,7 @@
                             <label>Ngày sinh</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="dayOfBirt" value="${customer.dayOfBirt}">
+                            <input class="form-control" type="text" name="dayOfBirt" value="${customer.dayOfBirt}">
                         </th>
                     </tr>
                     <tr>
@@ -62,7 +73,17 @@
                             <label>Giới tính</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="gender" value="${customer.gender}">
+                            <select name="gender" class="form-control">
+                                <c:if test="${customer.gender==0}">
+                                    <option value="0">nữ</option>
+                                    <option value="1">nam</option>
+                                </c:if>
+                                <c:if test="${customer.gender==1}">
+                                    <option value="1">nam</option>
+                                    <option value="0">nữ</option>
+                                </c:if>
+                            </select>
+
                         </th>
                     </tr>
                     <tr>
@@ -70,7 +91,7 @@
                             <label>Số CMND</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="idCard" value="${customer.idCard}">
+                            <input class="form-control" type="text" name="idCard" value="${customer.idCard}">
                         </th>
                     </tr>
                     <tr>
@@ -78,7 +99,7 @@
                             <label>Số điện thoại</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="phone" value="${customer.phone}">
+                            <input class="form-control" type="text" name="phone" value="${customer.phone}">
                         </th>
                     </tr>
                     <tr>
@@ -86,7 +107,7 @@
                             <label>Email</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="email" value="${customer.email}">
+                            <input class="form-control" type="text" name="email" value="${customer.email}">
                         </th>
                     </tr>
                     <tr>
@@ -94,12 +115,12 @@
                             <label>Địa chỉ</label>
                         </th>
                         <th scope="col">
-                            <input type="text" name="address" value="${customer.address}">
+                            <input class="form-control" type="text" name="address" value="${customer.address}">
                         </th>
                     </tr>
                     <tr>
                         <th></th>
-                        <th><input class="btn btn-primary" type="submit" value="SAVE"></th>
+                        <th><button  class=" btn btn-primary "  type="submit" value="SAVE">SAVE</button></th>
                     </tr>
                 </table>
             </fieldset>
