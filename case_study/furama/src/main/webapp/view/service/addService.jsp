@@ -50,16 +50,21 @@
                                 <label >Diện tích sử dụng</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="area">
+                                <input type="text" name="area" value="${service.area}" required>
                             </th>
-
+                            <th scope="col">
+                                <p style="color: red"></p>
+                            </th>
                         </tr>
                         <tr>
                             <th scope="col">
                                 <label >Chi phí thuê</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="cost">
+                                <input type="text" name="cost" value="${service.cost}">
+                            </th>
+                            <th scope="col">
+                                <p style="color: red">${cost}</p>
                             </th>
                         </tr>
                         <tr>
@@ -67,7 +72,10 @@
                                 <label>Số người tối đa</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="maxPeoble">
+                                <input type="text" name="maxPeoble" value="${service.maxPeoble}">
+                            </th>
+                            <th scope="col">
+                                <p style="color: red">${people}</p>
                             </th>
                         </tr>
                         <div>
@@ -78,7 +86,7 @@
                                 <label>Tiêu chuẩn phòng</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="standardRoom">
+                                <input type="text" name="standardRoom" value="${service.standardRoom}">
                             </th>
                         </tr>
                         <tr id="s2" style="display: none">
@@ -86,7 +94,7 @@
                                 <label >Mô tả tiện nghi khác</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="descreptionOtherConvenience">
+                                <input type="text" name="descreptionOtherConvenience" value="${service.descriptionOtherConvenience}">
                             </th>
                         </tr>
                         <tr id="s3" style="display: none">
@@ -94,7 +102,10 @@
                                 <label >Diện tích hồ bơi</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="poolArea">
+                                <input type="text" name="poolArea" value="${service.poolArea}">
+                            </th>
+                            <th scope="col">
+                                <p style="color: red">${area}</p>
                             </th>
                         </tr>
                         <tr id="s4" style="display: none">
@@ -102,7 +113,10 @@
                                 <label>Số tầng</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="numberOfFloors">
+                                <input type="text" name="numberOfFloors" value="${service.numberOfFloors}">
+                            </th>
+                            <th scope="col">
+                                <p style="color: red">${floors}</p>
                             </th>
                         </tr>
                         <tr id="s5" style="display: none">
@@ -110,7 +124,7 @@
                                 <label >Dịch vụ đi kèm</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="facilityFree">
+                                <input type="text" name="facilityFree" value="${service.facilityFree}">
                             </th>
                         </tr>
                         <tr id="s6" >
@@ -118,7 +132,7 @@
                                 <label >Mã kiểu thuê</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="renTypeId">
+                                <input type="text" name="renTypeId" value="${service.rentTypeId}">
                             </th>
                         </tr>
                         <tr id="s7" >
@@ -126,7 +140,7 @@
                                 <label >Loại dịch vụ</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="serviceTypeId">
+                                <input type="text" name="serviceTypeId" value="${service.facilityTypeId}">
                             </th>
                         </tr>
                         <tr>

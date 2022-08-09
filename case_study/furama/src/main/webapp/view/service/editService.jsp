@@ -113,13 +113,13 @@
                     </tr>
                     <tr id="s5" >
                         <th scope="col">
-                            <label >Dịch vụ đi kèm</label>
+                            <label >Dịch vụ đi kèm miễn phí</label>
                         </th>
                         <th scope="col">
                             <input type="text" name="facilityFree" value="${facility.facilityFree}">
                         </th>
                     </tr>
-                    <tr  >
+                    <tr >
                         <th scope="col">
                             <label >Loại dịch vụ</label>
                         </th>

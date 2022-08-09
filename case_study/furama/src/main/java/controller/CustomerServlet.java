@@ -88,6 +88,8 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void showAddCustomer(HttpServletRequest request, HttpServletResponse response) {
+        List<CustomerType> customerTypeList = customerService.displayCustomerType();
+        request.setAttribute("customerTypeList",customerTypeList);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
         try {
             requestDispatcher.forward(request,response);
@@ -148,6 +150,8 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void addCustomer(HttpServletRequest request, HttpServletResponse response) {
+        List<CustomerType> customerTypeList = customerService.displayCustomerType();
+        request.setAttribute("customerTypeList",customerTypeList);
         String idFacility = request.getParameter("idFacility");
         String name = request.getParameter("name");
         String dayOfbirt = request.getParameter("dayOfBirt");

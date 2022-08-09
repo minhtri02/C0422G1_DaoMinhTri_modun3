@@ -10,15 +10,22 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../../bootstrap/datatables/css/dataTables.bootstrap5.min.css">
+    <style>
+        *{
+            flex-wrap: wrap;
+
+        }
+    </style>
 </head>
 <body >
 <%@include file="../include/header.jsp" %>
-<nav class="row container-fluid">
-    <nav class="row" id="thanh_body">
-        <nav class="col-lg-12 d-flex justify-content-center pt-4">
+<%--<nav class="row">--%>
+<%--    <nav class="row" id="thanh_body">--%>
+        <div class="row d-flex justify-content-center pt-4">
             <form class="justify-content-center d-flex " action=""
-                  style="border: 1px solid #A9A9A9; border-radius: 20px; width: 100%">
+                  style="  width: 100%">
 
                 <fieldset>
                     <legend>List Customer</legend>
@@ -29,7 +36,7 @@
 <%--                        </form>--%>
 <%--                    </nav>--%>
                     <p style="color: red">${error}</p>
-                    <table class="table" style="width: 100%">
+                    <table id="tableCustomer" class="table table-striped table-bordered" >
                         <thead>
                         <tr>
                             <th scope="col">STT</th>
@@ -68,7 +75,7 @@
                                     </c:if>
                                 </c:forEach>
                                 </td>
-                                <td>
+                                <td class="d-flex">
                                     <button class="btn " type="button" onclick="location.href='/customer?action=showEditCustomer&idCustomer=${customer.idCustomer}'">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                              class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -87,11 +94,10 @@
                         </c:forEach>
 
                         </tbody>
-
                     </table>
                 </fieldset>
             </form>
-        </nav>
+        </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -113,9 +119,9 @@
                 </div>
             </div>
         </div>
-    </nav>
+<%--    </nav>--%>
 
-</nav>
+<%--</nav>--%>
 <%@include file="../include/footer.jsp" %>
 <script>
     function deleteCustomer(idCustomer, name){
@@ -124,5 +130,17 @@
     }
 </script>
 </body>
-<script src="bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<script src="../../bootstrap/jquery/jquery-3.5.1.min.js"></script>
+<script src="../../bootstrap/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../../bootstrap/datatables/js/dataTables.bootstrap5.min.js"></script>
+<script src="../../bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $('#tableCustomer').dataTable({
+            "dom":'lrtip',
+            "lengthChange":false,
+            "pageLength":5
+        });
+    });
+</script>
 </html>

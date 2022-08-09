@@ -29,10 +29,22 @@
 
                         <tr>
                             <th scope="col">
-                                <label>Mã loại khách</label>
+                                <label>Chọn loại khách</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="idFacility" value="${customer.idCustomer}">
+                                <select name="idFacility" class="table-row">
+                                    <option>chọn Loại dịch vụ</option>
+                                    <c:forEach var="customerType" items="${customerTypeList}">
+                                        <c:choose>
+                                            <c:when test="${customerType.customerTypeId==customer.idFacility}">
+                                                <option value="${customerType.customerTypeId}" selected>${customerType.nameCustomerType}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${customerType.customerTypeId}">${customerType.nameCustomerType}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </select>
                             </th>
                         </tr>
                         <tr>
@@ -40,16 +52,17 @@
                                 <label>Tên khách hàng</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="name" value="${customer.name}">
+                                <input type="text" name="name" value="${customer.name}" required>
                                 <p style="color: red">${name}</p>
                             </th>
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label>Ngày sinh(yyyy/mm/dd)</label>
+                                <label>Ngày sinh</label>
                             </th>
                             <th scope="col">
-                                <input type="text" name="dayOfBirt" value="${customer.dayOfBirt}">
+                                <input type="date" name="dayOfBirt" value="${customer.dayOfBirt}">
+                                <p style="color: red">${dayOfBirt}</p>
                             </th>
 
                         </tr>

@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "FuramaServlet", urlPatterns ={"/facility",""} )
 public class FacilityServlet extends HttpServlet {
@@ -193,9 +194,20 @@ public class FacilityServlet extends HttpServlet {
             facilityFree = request.getParameter("facilityFree");
              service = new Service(nameFacility,area,cost,maxPeoble,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloors,facilityFree,renTypeId,facilityTypeId);
         }
-        facilityService.addFacility(service);
-        request.setAttribute("error","thành công!");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/addService.jsp");
+        Map<String, String> mapErrors = facilityService.validate(service);
+        RequestDispatcher requestDispatcher ;
+        if (!mapErrors.isEmpty()){
+            for (Map.Entry<String, String> entry: mapErrors.entrySet()) {
+                request.setAttribute(entry.getKey(), entry.getValue());
+            }
+            request.setAttribute("service",service);
+             requestDispatcher = request.getRequestDispatcher("view/service/addService.jsp");
+
+        }else {
+            facilityService.addFacility(service);
+            request.setAttribute("error","thành công!");
+             requestDispatcher = request.getRequestDispatcher("view/service/addService.jsp");
+        }
         try {
             requestDispatcher.forward(request,response);
         } catch (ServletException e) {

@@ -12,8 +12,9 @@
     <title>
 
     </title>
-    <link rel="stylesheet" href="bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.min.css">
-</head>
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../../bootstrap/datatables/css/dataTables.bootstrap5.min.css"></head>
+
 <body background="https://img.meta.com.vn/Data/image/2021/09/30/background-la-gi-anh-background-dep-9.png">
 <div class="container-fluid">
     <%@include file="../include/header.jsp" %>
@@ -24,7 +25,7 @@
                 <fieldset>
                     <legend>List Service</legend>
                     <span style="color: red">${error}</span>
-                    <table class="table">
+                    <table id="tableCustomer" class="table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th scope="col">Mã dịch vụ</th>
@@ -104,12 +105,21 @@
 <%@include file="../include/footer.jsp" %>
 </div>
 </body>
-<script src="bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<script src="../../bootstrap/jquery/jquery-3.5.1.min.js"></script>
+<script src="../../bootstrap/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../../bootstrap/datatables/js/dataTables.bootstrap5.min.js"></script>
+<script src="../../bootstrap/bootstrap-5.0.2-dist/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 <script>
+    $(document).ready(function (){
+        $('#tableCustomer').dataTable({
+            "dom":'lrtip',
+            "lengthChange":false,
+            "pageLength":5
+        });
+    });
     function deleteFacility(idFacility, name){
         document.getElementById("idFacility").value=idFacility;
         document.getElementById("nameFacility").innerText=name;
     }
 </script>
-
 </html>

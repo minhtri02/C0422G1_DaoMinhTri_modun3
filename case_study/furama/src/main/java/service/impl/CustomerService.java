@@ -6,6 +6,9 @@ import repository.ICustomerRepository;
 import repository.impl.CustomerRepository;
 import service.ICustomerService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,13 +57,13 @@ public class CustomerService implements ICustomerService {
             mapErrors.put("name", "Please input name!");
         }
 
-        if (!customer.getPhone().isEmpty()) {
-            if (!customer.getPhone().matches("^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)[0-9]{7}$")) {
-                mapErrors.put("phone", "Please input right format!");
-            }
-        } else {
-            mapErrors.put("phone", "Please input phone!");
-        }
+//        if (!customer.getPhone().isEmpty()) {
+//            if (!customer.getPhone().matches("^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)[0-9]{7}$")) {
+//                mapErrors.put("phone", "Please input right format!");
+//            }
+//        } else {
+//            mapErrors.put("phone", "Please input phone!");
+//        }
 
         if (!customer.getEmail().isEmpty()) {
             if (!customer.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
@@ -76,6 +79,24 @@ public class CustomerService implements ICustomerService {
             }
         } else {
             mapErrors.put("idCard", "Please input personal code!");
+        }
+
+        if (!customer.getDayOfBirt().isEmpty()){
+            try {
+                LocalDate birthDay = LocalDate.parse(customer.getDayOfBirt());
+            } catch (Exception e) {
+                mapErrors.put("dayOfBirt", "Please input personal dayOfbirt!");
+            }
+        }else {
+            mapErrors.put("dayOfBirt", "Please input personal dayOfbirt!");
+        }
+
+        if (!customer.getPhone().isEmpty()){
+            if (!customer.getPhone().matches("^(090|091|\\(84\\)\\+(90|91))[0-9]{8}$")){
+                mapErrors.put("phone","Please input right format!");
+            }
+        }else {
+            mapErrors.put("phone", "Please input personal code!");
         }
 
         return mapErrors;
